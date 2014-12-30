@@ -43,7 +43,8 @@ only screen and (max-width: 760px),
 		padding-right: 10px; 
 		white-space: nowrap;
 	}
-	.table td button {margin-right: 32px;}
+	.table td button, .table td a.btn-option {margin-right: 32px;}
+	.table td a.btn-option:last-of-type {margin-right:0;}
 	
 	/*
 	Label the data
@@ -79,5 +80,12 @@ only screen and (max-width: 760px),
 	#invoices_wrapper td:nth-of-type(3):before { content: "Contatto principale"; }
 	#invoices_wrapper td:nth-of-type(4):before { content: "data di scadenza"; }
 	#invoices_wrapper td:nth-of-type(5):before { content: "Stato"; }
-	#invoices_wrapper td:nth-of-type(6):before { content: "Azione"; }*/
+	#invoices_wrapper td:nth-of-type(6):before { content: "Azione"; }
+	
+	.row .lbl, */
+	
+	
+}
+@media (max-width: 760px) {
+	ul.todo li .lbl p {width:55%!important;}
 }

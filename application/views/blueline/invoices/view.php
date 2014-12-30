@@ -5,8 +5,6 @@
 			<a href="<?=base_url()?>invoices/item/<?=$invoice->id;?>" class="btn btn-primary" data-toggle="mainmodal"><i class="icon-plus-sign"></i> <?=$this->lang->line('application_add_item');?></a>
 			<a href="<?=base_url()?>invoices/preview/<?=$invoice->id;?>" class="btn btn-primary"><i class="icon-file"></i> <?=$this->lang->line('application_preview');?></a>
 			<?php if($invoice->status != "Paid" && isset($invoice->company->name)){ ?><a href="<?=base_url()?>invoices/sendinvoice/<?=$invoice->id;?>" class="btn btn-primary"><i class="icon-envelope"></i> <?=$this->lang->line('application_send_invoice_to_client');?></a><?php } ?>
-            
-            <a href="<?=base_url()?>invoice_pagata.php?invoice_id=<?=$invoice->id;?>&status=<?php echo $invoice->status == "Paid" ? 'paid' : null ?>" class="btn btn-primary" data-toggle="mainmodal"><i class="icon-edit"></i> Segna come  <?php if($invoice->status == "Paid") { ?>non <?php } ?>pagata</a>
 
               </div>
           </div>
@@ -23,7 +21,7 @@
 			</li>
 			<li><span><?=$this->lang->line('application_issue_date');?>:</span> <?php $unix = human_to_unix($invoice->issue_date.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
 			<li><span><?=$this->lang->line('application_due_date');?>:</span> <a class="label <?php if($invoice->status == "Paid"){echo 'label-success';} if($invoice->due_date <= date('Y-m-d') && $invoice->status != "Paid"){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($invoice->due_date.' 00:00'); echo date($core_settings->date_format, $unix);?></a></li>
-			<?php if($invoice->company->vat != ""){?>
+			<?php if(isset($invoice->company->vat)){?> 
 			<li><span><?=$this->lang->line('application_vat');?>:</span> <?php echo $invoice->company->vat; ?></li>
 			<?php } ?>
 			<?php if(isset($invoice->project->name)){?>

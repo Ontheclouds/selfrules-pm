@@ -43,7 +43,7 @@
                   <ul class="details col-xs-12 col-sm-6"><span class="visible-xs divider"></span>
                     <li><span><?=$this->lang->line('application_start_date');?>:</span> <?php  $unix = human_to_unix($project->start.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
 				<li><span><?=$this->lang->line('application_deadline');?>:</span> <?php  $unix = human_to_unix($project->end.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
-				<li><span><?=$this->lang->line('application_time_spent');?>:</span> <?=$time_spent;?> <a href="<?=base_url()?>projects/timer_reset/<?=$project->id;?>" class="tt" title="<?=$this->lang->line('application_reset_timer');?>"><i class="icon-refresh"></i></a></li>
+				<li><span><?=$this->lang->line('application_time_spent');?>:</span> <?=$time_spent;?> <a href="<?=base_url()?>projects/timer_reset/<?=$project->id;?>" class="tt" title="<?=$this->lang->line('application_reset_timer');?>"><i class="fa fa-refresh"></i></a></li>
 				<li><span><?=$this->lang->line('application_created_on');?>:</span> <?php  echo date($core_settings->date_format.' '.$core_settings->date_time_format, $project->datetime); ?></li>
 				</ul>
                   <br clear="both">

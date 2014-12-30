@@ -71,7 +71,6 @@ if(isset($project)){ ?>
                           <input type="text" name="category" class="form-control typeahead" id="category"  value="<?php if(isset($project)){echo $project->category;} ?>" placeholder="<?=$this->lang->line('application_category');?>" required/>
 </div>
 
-
 <div class="form-group">
                           <label for="phases"><?=$this->lang->line('application_phases');?> *</label>
                           <input type="text" name="phases" class="form-control" id="phases"  value="<?php if(isset($project)){echo $project->phases;}else{echo "Planning, Developing, Testing";} ?>" required/>

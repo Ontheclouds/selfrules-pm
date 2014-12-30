@@ -1,5 +1,5 @@
 <?php   
-$attributes = array('class' => 'ajaxform', 'id' => '_task');
+$attributes = array('class' => 'taskform', 'id' => '_task');
 echo form_open($form_action, $attributes); 
 $public = "0";
 ?>
@@ -70,7 +70,7 @@ $public = "0";
             <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/delete/<?=$task->id;?>" class="btn btn-danger pull-left" ><?=$this->lang->line('application_delete');?></a>
           <?php }else{  ?>
          <a class="btn btn-default pull-left" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
-        <i class="fa fa-spinner fa-spin" style="display:none"></i>
+        <i class="fa fa-spinner fa-spin" id="showloader" style="display:none"></i> 
         <input type="submit" id="send" name="send" class="btn btn-primary" value="<?=$this->lang->line('application_save_and_add');?>"/>
         <?php } ?>
         <input type="submit" name="send" class="btn btn-primary" value="<?=$this->lang->line('application_save');?>"/>

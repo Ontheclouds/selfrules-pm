@@ -385,7 +385,7 @@ body{
 		    letter-spacing:1px;
 		    border-radius: 3px;
 			-webkit-border-radius: 3px;
-			line-height: 19px;
+			line-height: 21px;
 			font-weight: 600;
 		}
 		.content-area{
@@ -602,7 +602,8 @@ body{
 		    }
 
 		.navbar-brand{
-			height: 64px;
+			height:auto;
+			min-height: 64px;
 			padding: 0;
 			line-height: 64px;
 			margin-left: 0 !important;
@@ -2301,8 +2302,7 @@ a.cke_button_off:hover, a.cke_button_off:focus, a.cke_button_off:active, a.cke_b
 
 		.login input.form-control {
 			height: 40px;
-			
-			padding: 15px; 
+			padding: 0 10px;
 		}
 		.login label {
 			padding-left: 2px;

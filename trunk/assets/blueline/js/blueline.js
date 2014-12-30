@@ -137,6 +137,32 @@ $(".nano").nanoScroller();
 });
 
 
+  $(document).on("click", '.taskform #send', function (e) {
+
+    var content = $('textarea[name="description"]').html($('.note-editable').code());
+    var buttontext = $(".taskform #send").val();
+    //$(".taskform #send").val('...');
+    $("#showloader").show();
+    var url = $(this).closest('form').attr('action'); 
+    var active = $(this);
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $(this).closest('form').serialize(),
+           success: function(data)
+           {
+               
+               //$(".taskform #send").val(buttontext);
+              $(".taskform")[0].reset();
+                 $(".note-editable").html("");
+                 $("#showloader").hide();
+                
+           }
+         });
+
+    return false;
+});
+
 
 //Project Notes
 $(document).on("click", '.note-form #send', function (e) {
@@ -300,8 +326,11 @@ $('.to_modal').click(function(e) {
       $('.use-tooltip').tooltip();
        $('.tt').tooltip();
        
-      $('.po').popover({html:true, trigger: 'focus'});
+      $('.po').popover({html:true});
       
+       $(document).on("click", '.po-close', function (e) {
+          $('.po').popover('hide');
+      });
       $(document).on("click", '.po-delete', function (e) {
           $(this).closest('tr').fadeOut(400);
       });
@@ -481,22 +510,10 @@ $(".fadein").toggleClass("slide");
 
         }); */
         
-$(document).ready(function() {
-	setTableContent();
-});
-$(window).resize(function() {
-	setTableContent();
-});
-function setTableContent() {
-	var viewportWidth = $(window).width();
-	if (viewportWidth < 1024)  {
-		if ($('.table-div').length) {
-			$('.table-div tbody tr').each( function() {
-				$(this).find('td').each(function(index, value) {
-					var theaderText = $('.table-div thead th').eq(index).text();
-					$(this).attr('data-content', theaderText);
-				});
-			});
-		}
-	}
-}
+        
+        
+  
+
+
+
+

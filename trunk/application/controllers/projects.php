@@ -73,6 +73,8 @@ class Projects extends MY_Controller {
 			unset($_POST['send']);
 			$_POST['datetime'] = time();
 			$_POST = array_map('htmlspecialchars', $_POST);
+			unset($_POST['files']);
+
 			$project = Project::create($_POST);
 			$new_project_reference = $_POST['reference']+1;
 			$project_reference = Setting::first();
@@ -99,6 +101,7 @@ class Projects extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			$id = $_POST['id'];
+			unset($_POST['files']);
 			$_POST = array_map('htmlspecialchars', $_POST);
 			if (!isset($_POST["progress_calc"])) {
 				$_POST["progress_calc"] = 0;
@@ -223,6 +226,7 @@ class Projects extends MY_Controller {
 				$this->content_view = 'projects/_tasks';
 				if($_POST){
 					unset($_POST['send']);
+					unset($_POST['files']);
 					$description = $_POST['description'];
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['description'] = $description;
@@ -245,6 +249,7 @@ class Projects extends MY_Controller {
 				$this->view_data['task'] = ProjectHasTask::find($task_id);
 				if($_POST){
 					unset($_POST['send']);
+					unset($_POST['files']);
 					if(!isset($_POST['public'])){$_POST['public'] = 0;}
 					$description = $_POST['description'];
 					$_POST = array_map('htmlspecialchars', $_POST);

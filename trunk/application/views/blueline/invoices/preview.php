@@ -313,7 +313,7 @@ table.tablesorter tbody tr.even td {
         <td width="50%" align="left" valign="top"><span class="violet">Bonifico Bancario:</span><br>
           IT76V0558401795000000045404<br>
           <span class="violet">BIC/SWIFT:</span><br>
-          WEBNITMMXXX</td>
+          BPMIITMMXXX</td>
         <td width="50%" align="right" valign="top"><span class="violet">Riepilogo Rate</span><br>
 <?php echo nl2br($invoice->terms); ?></td>
       </tr>

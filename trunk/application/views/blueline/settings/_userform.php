@@ -27,9 +27,11 @@ echo form_open_multipart($form_action, $attributes);
         <label for="password"><?=$this->lang->line('application_confirm_password');?> <?php if(!isset($user)){echo '*';} ?></label>
         <input id="confirm_password" type="password" name="confirm_password" class="form-control" data-match="#password" />
 </div>
+
 <div class="form-group">
-                <label for="userfile"><?=$this->lang->line('application_profile_picture');?></label><div>
-                <input id="uploadFile" class="form-control uploadFile" placeholder="Choose File" disabled="disabled" />
+                <label for="userfile"><?=$this->lang->line('application_profile_picture');?></label>
+                <div>
+                    <input id="uploadFile" type="text" name="dummy" class="form-control uploadFile" placeholder="Choose File" disabled="disabled" />
                           <div class="fileUpload btn btn-primary">
                               <span><i class="fa fa-upload"></i><span class="hidden-xs"> <?=$this->lang->line('application_select');?></span></span>
                               <input id="uploadBtn" type="file" name="userfile" class="upload" />

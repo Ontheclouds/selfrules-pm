@@ -324,6 +324,7 @@ class Projects extends MY_Controller {
 				if($_POST){
 					unset($_POST['send']);
 					unset($_POST['_wysihtml5_mode']);
+					unset($_POST['files']);
 					//$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['text'] = $_POST['message'];
 					unset($_POST['message']);
@@ -360,45 +361,73 @@ class Projects extends MY_Controller {
 					$config['encrypt_name'] = TRUE;
 					$config['allowed_types'] = '*';
 
-					$this->load->library('upload', $config);
+                    ini_set('display_errors', 'On');
+                    error_reporting(E_ALL);
 
-					if ( ! $this->upload->do_upload())
-						{
-							$error = $this->upload->display_errors('', ' ');
-							$this->session->set_flashdata('message', 'error:'.$error);
-							redirect('projects/media/'.$id);
+					$this->load->library('uploads', $config);
+	
+					//Clò Luca changes
+					if(count($_FILES['userfile'])) {
+                        if ( ! $this->uploads->do_multi_upload('userfile')) {
+                                $error = $this->uploads->display_errors('', ' ');
+                                $this->session->set_flashdata('message', 'error:'.$error);
+                                redirect('projects/media/'.$id);
+                        } else	{
+
+                            $data = $this->uploads->get_multi_upload_data();
+                            foreach ($data as $file) {
+                                unset($_POST['send']);
+                                unset($_POST['userfile']);
+                                unset($_POST['file-name']);
+                                unset($_POST['files']);
+                                $_POST = array_map('htmlspecialchars', $_POST);
+                                $_POST['project_id'] = $id;
+                                $_POST['user_id'] = $this->user->id;
+                                $_POST['filename'] = $file['file_name'];
+                                $_POST['savename'] = $file['file_name'];
+                                $_POST['type'] = $file['file_type'];
+
+                                $media = ProjectHasFile::create($_POST);
+                            }
+                        }
+					} else {
+							if ( ! $this->upload->do_upload()) {
+									$error = $this->upload->display_errors('', ' ');
+									$this->session->set_flashdata('message', 'error:'.$error);
+									redirect('projects/media/'.$id);
+							} else	{
+								$data = array('upload_data' => $this->upload->data());
+	
+								$_POST['filename'] = $data['upload_data']['orig_name'];
+								$_POST['savename'] = $data['upload_data']['file_name'];
+								$_POST['type'] = $data['upload_data']['file_type'];
+							}
+
+							unset($_POST['send']);
+							unset($_POST['userfile']);
+							unset($_POST['file-name']);
+							unset($_POST['files']);
+							$_POST = array_map('htmlspecialchars', $_POST);
+							$_POST['project_id'] = $id;
+							$_POST['user_id'] = $this->user->id;
+							$media = ProjectHasFile::create($_POST);
 						}
-						else
-						{
-							$data = array('upload_data' => $this->upload->data());
-
-							$_POST['filename'] = $data['upload_data']['orig_name'];
-							$_POST['savename'] = $data['upload_data']['file_name'];
-							$_POST['type'] = $data['upload_data']['file_type'];
+					if(!$media){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_media_error'));}
+					else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_media_success'));
+					
+						$attributes = array('subject' => $this->lang->line('application_new_media_subject'), 'message' => '<b>'.$this->user->firstname.' '.$this->user->lastname.'</b> '.$this->lang->line('application_uploaded'). ' <a href="'.base_url().'projects/media/'.$id.'/view/'.$media->id.'">'.$_POST['name'].'</a>', 'datetime' => time(), 'project_id' => $id, 'type' => 'media', 'user_id' => $this->user->id);
+						$activity = ProjectHasActivity::create($attributes);
+						
+						foreach ($this->view_data['project']->project_has_workers as $workers){
+							send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
+						}
+						if(isset($this->view_data['project']->company->email)){
+						send_notification($this->view_data['project']->company->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
 						}
 
-					unset($_POST['send']);
-					unset($_POST['userfile']);
-					unset($_POST['file-name']);
-					$_POST = array_map('htmlspecialchars', $_POST);
-					$_POST['project_id'] = $id;
-					$_POST['user_id'] = $this->user->id;
-					$media = ProjectHasFile::create($_POST);
-		       		if(!$media){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_media_error'));}
-		       		else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_media_success'));
-		       		
-		       		    $attributes = array('subject' => $this->lang->line('application_new_media_subject'), 'message' => '<b>'.$this->user->firstname.' '.$this->user->lastname.'</b> '.$this->lang->line('application_uploaded'). ' <a href="'.base_url().'projects/media/'.$id.'/view/'.$media->id.'">'.$_POST['name'].'</a>', 'datetime' => time(), 'project_id' => $id, 'type' => 'media', 'user_id' => $this->user->id);
-					    $activity = ProjectHasActivity::create($attributes);
-    		       		
-    		       		foreach ($this->view_data['project']->project_has_workers as $workers){
-            			    send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
-            			}
-            			if(isset($this->view_data['project']->company->email)){
-            			send_notification($this->view_data['project']->company->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
-            			}
-
-		       		}
+					}
 					redirect('projects/view/'.$id);
+					
 				}else
 				{
 					$this->theme_view = 'modal';
@@ -414,6 +443,7 @@ class Projects extends MY_Controller {
 				if($_POST){
 					unset($_POST['send']);
 					unset($_POST['_wysihtml5_mode']);
+					unset($_POST['files']);
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$media_id = $_POST['id'];
 					$media = ProjectHasFile::find($media_id);
@@ -515,6 +545,7 @@ class Projects extends MY_Controller {
 					$_POST['project_id'] = $id;
 					$_POST['user_id'] = $this->user->id;
 					$_POST['type'] = "comment";
+					unset($_POST['files']);
 					$_POST['datetime'] = time();
 					$activity = ProjectHasActivity::create($_POST);
 		       		if(!$activity){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_error'));}

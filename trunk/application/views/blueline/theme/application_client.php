@@ -132,7 +132,7 @@ if(is_numeric($act_uri_submenu)){
                 }
                  ?>" height="14px">
        <span class="hidden-xs"><?php echo character_limiter($this->client->firstname." ".$this->client->lastname, 25);?> </span>
-      <span><a href="<?=site_url("messages");?>" title="<?=$this->lang->line('application_messages');?>"><i class="fa fa-inbox"></i></a></span>
+      <span><a href="<?=site_url("cmessages");?>" title="<?=$this->lang->line('application_messages');?>"><i class="fa fa-inbox"></i></a></span>
       <span><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><i class="fa fa-cog"></i></a></span>
       <span class="btn-group">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">

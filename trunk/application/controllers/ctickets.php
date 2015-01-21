@@ -66,6 +66,7 @@ class cTickets extends MY_Controller {
 
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$settings = Setting::first();
 			$client = Client::find_by_id($this->client->id);
 			$user = User::find_by_id($settings->ticket_default_owner);
@@ -156,6 +157,7 @@ class cTickets extends MY_Controller {
 
 					unset($_POST['send']);
 					unset($_POST['_wysihtml5_mode']);
+					unset($_POST['files']);
 					$ticket = Ticket::find_by_id($id);
 					$ticket->updated = "1";
 					$ticket->save();

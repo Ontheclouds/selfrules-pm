@@ -141,7 +141,7 @@ AND '$year-$thismonth-31' ";
 					$this->view_data["message"] = array_filter($query->result());
 				}
 				if ($value->link == "projects") {
-					$sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "'.$this->user->id.'" ORDER BY project_id';
+					$sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "'.$this->user->id.'" ORDER BY priority DESC';
 					$taskquery = $this->db->query($sql);
 					$this->view_data["tasks"] = $taskquery->result();
 				}
@@ -254,7 +254,7 @@ AND '$year-$thismonth-31' ";
 					$this->view_data["message"] = array_filter($query->result());
 				}
 				if ($value->link == "projects") {
-					$sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "'.$this->user->id.'" ORDER BY project_id';
+					$sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "'.$this->user->id.'" ORDER BY priority DESC';
 					$taskquery = $this->db->query($sql);
 					$this->view_data["tasks"] = $taskquery->result();
 				}

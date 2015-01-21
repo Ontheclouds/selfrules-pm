@@ -50,7 +50,7 @@ class cProjects extends MY_Controller {
 						 		$this->lang->line('application_media') => 'cprojects/media/'.$id,
 						 		);
 		$this->view_data['project'] = Project::find($id);
-		$this->view_data['project_has_invoices'] = Invoice::find_by_project_id($id);
+		$this->view_data['project_has_invoices'] = Invoice::all(array('conditions' => array('project_id = ?', $id)));
 		if(!isset($this->view_data['project_has_invoices'])){$this->view_data['project_has_invoices'] = array();}
 		if($this->view_data['project']->company_id != $this->client->company->id){ redirect('cprojects');}
 		$this->content_view = 'projects/client_views/view';
@@ -69,6 +69,7 @@ class cProjects extends MY_Controller {
 				if($_POST){
 					unset($_POST['send']);
 					unset($_POST['_wysihtml5_mode']);
+					unset($_POST['files']);
 					//$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['project_id'] = $id;
 					$_POST['media_id'] = $media_id; 
@@ -119,6 +120,7 @@ class cProjects extends MY_Controller {
 					unset($_POST['send']);
 					unset($_POST['userfile']);
 					unset($_POST['file-name']);
+					unset($_POST['files']);
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['project_id'] = $id;
 					$_POST['client_id'] = $this->client->id;
@@ -141,6 +143,7 @@ class cProjects extends MY_Controller {
 				if($_POST){
 					unset($_POST['send']);
 					unset($_POST['_wysihtml5_mode']);
+					unset($_POST['files']);
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$media_id = $_POST['id'];
 					$media = ProjectHasFile::find($media_id);
@@ -221,6 +224,7 @@ class cProjects extends MY_Controller {
 					$_POST['project_id'] = $id;
 					$_POST['client_id'] = $this->client->id;
 					$_POST['type'] = "comment";
+					unset($_POST['files']);
 					$_POST['datetime'] = time();
 					$activity = ProjectHasActivity::create($_POST);
 		       		if(!$activity){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_error'));}

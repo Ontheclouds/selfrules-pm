@@ -15,6 +15,16 @@
       $('#item-editor').slideDown('slow');
     });
 
+//upload button
+        $(document).on("change", '#uploadBtn', function (e) {
+          var value = $( this ).val().replace(/\\/g, '/').replace(/.*\//, '');
+            $("#uploadFile").val(value);
+        });
+        $(document).on("change", '#uploadBtn2', function (e) {
+          var value = $( this ).val().replace(/\\/g, '/').replace(/.*\//, '');
+            $("#uploadFile2").val(value);
+        });
+
 // Checkbox Plugin
 
         $(".checkbox").labelauty(); 

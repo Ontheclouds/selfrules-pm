@@ -380,11 +380,11 @@ $('.to_modal').click(function(e) {
 
         //upload button
         $(document).on("change", '#uploadBtn', function (e) {
-          var value = $( this ).val();
+          var value = $( this ).val().replace(/\\/g, '/').replace(/.*\//, '');
             $("#uploadFile").val(value);
         });
         $(document).on("change", '#uploadBtn2', function (e) {
-          var value = $( this ).val();
+          var value = $( this ).val().replace(/\\/g, '/').replace(/.*\//, '');
             $("#uploadFile2").val(value);
         });
 
@@ -510,10 +510,22 @@ $(".fadein").toggleClass("slide");
 
         }); */
         
-        
-        
-  
-
-
-
-
+$(document).ready(function() {
+	setTableContent();
+});
+$(window).resize(function() {
+	setTableContent();
+});
+function setTableContent() {
+	var viewportWidth = $(window).width();
+	if (viewportWidth < 1024)  {
+		if ($('.table-div').length) {
+			$('.table-div tbody tr').each( function() {
+				$(this).find('td').each(function(index, value) {
+					var theaderText = $('.table-div thead th').eq(index).text();
+					$(this).attr('data-content', theaderText);
+				});
+			});
+		}
+	}
+}

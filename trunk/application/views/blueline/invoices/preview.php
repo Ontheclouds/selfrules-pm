@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(1);
+ini_set('display_errors', 'On');
 
 $language = $this->input->cookie('language');
 if (!isset($language))
@@ -44,7 +45,7 @@ body {
 	margin-bottom:8px;	
 }
 .firstPart {
-	height: 685px;	
+	height: 645px;	
 }
 </style>
 
@@ -233,7 +234,6 @@ table.tablesorter tbody tr.even td {
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="50%" align="left" valign="top"><img src="http://www.selfrules.org/wp-content/uploads/2014/08/logo-nuovo-trasparente.png" alt="Logo Seflrules" width="170" height="124"><br>
-    <br>
     <br></td>
     <td width="50%" align="right" valign="top"><span class="violet">Selfrules</span> <span class="azure">di De Luca Mattia Filippo</span><br>
       <span class="azure">Via del Carmine 8/b, Spilamberto (MO)</span><br>
@@ -241,8 +241,7 @@ table.tablesorter tbody tr.even td {
       <span class="violet">Cell:</span> <span class="azure">+39 348 7749308</span><br>
       <span class="violet">E-Mail:</span> <span class="azure">info@selfrules.org</span><br>
       <span class="violet">Web:</span> <span class="azure">http://www.selfrules.org</span><br>
-      <br>
-    <br></td>
+      <br></td>
   </tr>
   <tr>
     <td align="left" valign="top"><span class="violet">Cliente:</span><br>
@@ -259,7 +258,7 @@ table.tablesorter tbody tr.even td {
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="8">
   <tr class="azure">
-    <td width="24%" height="51" align="center">Servizio</td>
+    <td width="24%" align="center">Servizio</td>
     <td width="51%" align="center">Dettagli</td>
     <td width="7%" align="center">/Qtà Ore</td>
     <td width="18%" align="center">Importo</td>
@@ -269,7 +268,7 @@ table.tablesorter tbody tr.even td {
     <div class="inviceItem"><?php if(!empty($value->name)){echo $value->name;}else{ echo $invoice->invoice_has_items[$i]->item->name; }?>
     </div><?php endforeach; ?></td>
     <td align="left" valign="top" style="border-top:3px solid #D5D7E6;border-right:3px solid #D5D7E6;border-bottom:3px solid #D5D7E6"><?php foreach ($items as $i => $value):?>
-    <div class="inviceItem"><?=$invoice->invoice_has_items[$i]->description;?></div><?php endforeach; ?></td>
+    <div class="inviceItem"><?= nl2br($invoice->invoice_has_items[$i]->description) ?></div><?php endforeach; ?></td>
     <td align="center" valign="top" style="border-top:3px solid #D5D7E6;border-right:3px solid #D5D7E6;border-bottom:3px solid #D5D7E6"><?php foreach ($items as $i => $value):?>
     <div class="inviceItem"><?=$invoice->invoice_has_items[$i]->amount;?></div><?php endforeach; ?></td>
     <td align="center" valign="top" style="border-top:3px solid #D5D7E6;border-bottom:3px solid #D5D7E6"><?php $sum = 0; foreach ($items as $i => $value):?>
@@ -310,7 +309,8 @@ table.tablesorter tbody tr.even td {
   <tr>
     <td style="border-top: 1px dotted #2BAADF"><table width="98%" border="0" align="center" cellpadding="8" cellspacing="0">
       <tr>
-        <td width="50%" align="left" valign="top"><span class="violet">Bonifico Bancario:</span><br>
+        <td width="50%" align="left" valign="top"><span class="violet">Beneficiario:</span><br>
+          Mattia Filippo De Luca<br><span class="violet">Bonifico Bancario:</span><br>
           IT76V0558401795000000045404<br>
           <span class="violet">BIC/SWIFT:</span><br>
           BPMIITMMXXX</td>

@@ -310,7 +310,8 @@ table.tablesorter tbody tr.even td {
   <tr>
     <td style="border-top: 1px dotted #2BAADF"><table width="98%" border="0" align="center" cellpadding="8" cellspacing="0">
       <tr>
-        <td width="50%" align="left" valign="top"><span class="violet">Bonifico Bancario:</span><br>
+        <td width="50%" align="left" valign="top"><span class="violet">Beneficiario:</span><br>
+          Mattia Filippo De Luca<br><span class="violet">Bonifico Bancario:</span><br>
           IT76V0558401795000000045404<br>
           <span class="violet">BIC/SWIFT:</span><br>
           WEBNITMMXXX</td>

@@ -89,3 +89,4 @@ only screen and (max-width: 760px),
 @media (max-width: 760px) {
 	ul.todo li .lbl p {width:55%!important;}
 }
+.stdpad ul.todo li {padding:11px 0 0 12px;}

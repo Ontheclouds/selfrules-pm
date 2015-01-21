@@ -4,7 +4,7 @@
 	 	<div class="table-head"><?=$this->lang->line('application_ticket_details');?></div>
 		<div class="subcont">
 			<ul class="ticket-details">
-			<?php $lable = FALSE; if($ticket->status == "new"){ $lable = "label-important"; }elseif($ticket->status == "open"){$lable = "label-warning";}elseif($ticket->status == "closed"){$lable = "label-success";}elseif($ticket->status == "reopened"){$lable = "label-warning";} ?>
+			<?php $lable = FALSE; if($ticket->status == "new"){ $lable = "label-important"; }elseif($ticket->status == "open"){$lable = "label-warning";}elseif($ticket->status == "closed" || $ticket->status == "inprogress"){$lable = "label-success";}elseif($ticket->status == "reopened"){$lable = "label-warning";} ?>
 	
 				<li><h6><?=$this->lang->line('application_ticket_number');?>:</h6> #<?=$ticket->reference;?></li>
 				<li><h6><?=$this->lang->line('application_status');?>:</h6> <span class="label <?php echo $lable; ?>"><?=$this->lang->line('application_ticket_status_'.$ticket->status);?></span></li>

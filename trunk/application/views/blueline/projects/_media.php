@@ -33,7 +33,7 @@ echo form_open_multipart($form_action, $attributes);
                 <input id="uploadFile" class="form-control uploadFile" placeholder="Choose File" disabled="disabled" />
                           <div class="fileUpload btn btn-primary">
                               <span><i class="fa fa-upload"></i><span class="hidden-xs"> <?=$this->lang->line('application_select');?></span></span>
-                              <input id="uploadBtn" type="file" name="userfile" class="upload" />
+                              <input id="uploadBtn" type="file" name="userfile[]" class="upload" multiple="" />
                           </div>
                   </div>
               </div>

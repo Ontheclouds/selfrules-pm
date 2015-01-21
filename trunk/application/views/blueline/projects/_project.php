@@ -30,7 +30,7 @@ if(isset($project)){ ?>
 </div>
 <div class="checkbox">
                            <label>
-                            <input name="progress" value="1" type="checkbox" <?php if(isset($project) && $project->progress_calc == "1"){ ?> checked="checked" <?php } ?>/>
+                            <input name="progress_calc" value="1" type="checkbox" <?php if(isset($project) && $project->progress_calc == "1"){ ?> checked="checked" <?php } ?>/>
                             <span class="lbl"> <?=$this->lang->line('application_calculate_progress');?> </span>
                           </label>
                           <script>
@@ -54,7 +54,7 @@ if(isset($project)){ ?>
 
 <div class="form-group">
                           <label for="name"><?=$this->lang->line('application_name');?> *</label>
-                          <input type="text" name="name" class="form-control" id="name"  value="<?php if(isset($project)){echo $project->name;} ?>" placeholder="<?=$this->lang->line('application_name');?>" required/>
+                          <input type="text" name="name" class="form-control" id="name"  value="<?php if(isset($project)){echo $project->name;} ?>" required/>
 </div>
 
 <div class="form-group">
@@ -68,7 +68,7 @@ if(isset($project)){ ?>
 
 <div class="form-group">
                           <label for="category"><?=$this->lang->line('application_category');?></label>
-                          <input type="text" name="category" class="form-control typeahead" id="category"  value="<?php if(isset($project)){echo $project->category;} ?>" placeholder="<?=$this->lang->line('application_category');?>" required/>
+                          <input type="text" name="category" class="form-control typeahead" id="category"  value="<?php if(isset($project)){echo $project->category;} ?>" required/>
 </div>
 
 <div class="form-group">

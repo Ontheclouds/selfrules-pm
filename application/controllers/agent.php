@@ -17,7 +17,6 @@ class Agent extends MY_Controller
 		if($this->client){	
 				$user = Client::find($this->client->id);
 				if($_POST){
-					if(!empty($_POST['file-name'])){
 					$config['upload_path'] = './files/media/';
 					$config['encrypt_name'] = TRUE;
 					$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -31,14 +30,7 @@ class Agent extends MY_Controller
 							$data = array('upload_data' => $this->upload->data());
 
 							$_POST['userpic'] = $data['upload_data']['file_name'];
-						}else{
-							$error = $this->upload->display_errors('', ' ');
-							if($error != "You did not select a file to upload."){
-								$this->session->set_flashdata('message', 'error:'.$error);
-								redirect('');
-							}
 						}
-					}
 					unset($_POST['send']);
 					unset($_POST['userfile']);
 					unset($_POST['file-name']);
@@ -58,7 +50,7 @@ class Agent extends MY_Controller
 			 $user = User::find($this->user->id);
 
 			 if($_POST){
-			 	if(!empty($_POST['file-name'])){
+			 	
 					$config['upload_path'] = './files/media/';
 					$config['encrypt_name'] = TRUE;
 					$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -72,14 +64,8 @@ class Agent extends MY_Controller
 							$data = array('upload_data' => $this->upload->data());
 
 							$_POST['userpic'] = $data['upload_data']['file_name'];
-						}else{
-							$error = $this->upload->display_errors('', ' ');
-							if($error != "You did not select a file to upload."){
-								$this->session->set_flashdata('message', 'error:'.$error);
-								redirect('');
-							}
 						}
-					}
+					
 					unset($_POST['send']);
 					unset($_POST['userfile']);
 					unset($_POST['file-name']);

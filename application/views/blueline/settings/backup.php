@@ -24,6 +24,7 @@
 			<th><?=$this->lang->line('application_action');?></th>
 		</thead>
 		<?php if(isset($backups)){
+		arsort($backups);
 		foreach ($backups as $file):
 		 $filename = explode("_", $file);
 		?>
@@ -32,7 +33,7 @@
 			<td><?php echo str_replace('.zip', '', $filename[1]);?> <?php echo str_replace('.zip', '', $filename[2]);?></td>
 			<td><?php echo str_replace('-', ' ', $filename[0]);?></td>
 			<td class="option" style="width:8%">
-				<a class="btn-option tt" href="<?=base_url()?>mysql_download/<?=$file?>" title="<?=$this->lang->line('application_download');?>"><i class="fa fa-download"></i></a>
+				<a class="btn-option tt" href="<?=base_url()?>settings/mysql_download/<?=$file?>" title="<?=$this->lang->line('application_download');?>"><i class="fa fa-download"></i></a>
 			</td>
 		</tr>
 

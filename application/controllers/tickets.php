@@ -101,6 +101,7 @@ class Tickets extends MY_Controller {
 
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 
 			$client = Client::find_by_id($_POST['client_id']);
 			$user = User::find_by_id($_POST['user_id']);
@@ -177,6 +178,7 @@ class Tickets extends MY_Controller {
 			unset($_POST['_wysihtml5_mode']);
 			$id = $_POST['id'];
 			unset($_POST['id']);
+			unset($_POST['files']);
 			$user = User::find_by_id($_POST['user_id']);
 			$assign = Ticket::find_by_id($id);
 			$attr = array('user_id' => $_POST['user_id']);
@@ -213,6 +215,7 @@ class Tickets extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['id'];
 			unset($_POST['id']);
 			$client = Client::find_by_id($_POST['client_id']);
@@ -252,6 +255,7 @@ class Tickets extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['id'];
 			unset($_POST['id']);
 			$ticket = Ticket::find_by_id($id);
@@ -277,6 +281,7 @@ class Tickets extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['id'];
 			unset($_POST['id']);
 			$ticket = Ticket::find_by_id($id);
@@ -302,6 +307,7 @@ class Tickets extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['id'];
 			unset($_POST['id']);
 			$ticket = Ticket::find_by_id($id);
@@ -327,6 +333,7 @@ class Tickets extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['ticket_id'];
 			unset($_POST['ticket_id']);
 			$ticket = Ticket::find_by_id($id);
@@ -400,6 +407,7 @@ class Tickets extends MY_Controller {
 
 					unset($_POST['send']);
 					unset($_POST['_wysihtml5_mode']);
+					unset($_POST['files']);
 					$ticket = Ticket::find($id);
 					if(isset($_POST['notify'])){
 						if(isset($ticket->client->email)){$to = $ticket->client->email;}else{$emailex = explode(' - ', $ticket->from); $to = $emailex[1];}

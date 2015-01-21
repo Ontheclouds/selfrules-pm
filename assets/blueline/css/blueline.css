@@ -182,6 +182,11 @@ body{
 		.sidebar h4 {
 			color:#F5F5F5;
 		}
+		.nav.nav-sidebar>li.active>a{
+			padding: 13px 15px 13px 15px;
+			margin-left: -15px;
+			box-shadow: 3px 0px 0px 0px #11A7DB inset;
+		}
 		.statstic-chart{
 		    background:#FFF;
 		    padding:15px 0;
@@ -235,7 +240,7 @@ body{
 
 		}
 		a.label-default:hover{
-		   color:#444;
+		   color:#FFF;
 		   border-color:#444;
 		}
 		.label-info{
@@ -298,6 +303,11 @@ body{
 				-o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
 				transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1); */
 		}
+		/* Placeholders */
+		::-webkit-input-placeholder { color:#F5F5F5; font-weight: 300; }
+		::-moz-placeholder { color:#F5F5F5; font-weight: 300;} /* firefox 19+ */
+		:-ms-input-placeholder { color:#F5F5F5; font-weight: 300;} /* ie */
+		input:-moz-placeholder { color:#F5F5F5; font-weight: 300;}
 		.nav>li>a:hover, .nav>li>a:focus {
 		background: none;
 		}
@@ -749,16 +759,22 @@ body{
 		}
 		.submenu ul{
 			list-style: none;
-			min-height: 50px;
+			min-height: 30px;
 			min-width: 200px;
 			padding: 10px;
-			margin: 0px 15px;
+			margin: 0px 0px;
 		}
 		.submenu ul li a, .nav-sidebar .submenu .menu-icon, .nav-sidebar .submenu .menu-icon i{
 			font-weight: 400;
 			letter-spacing: 1px;
 			font-size: 11px;
 
+		}
+		.submenu ul li.underline{
+			border-bottom: 1px solid #555;
+			font-size: 12px;
+			text-transform: uppercase;
+			margin-bottom: 5px;
 		}
 		.nav-sidebar .submenu .menu-icon{
 			width: 31px;
@@ -859,8 +875,9 @@ body{
 
 		}
 		label {
-			font-weight: 400;
+			font-weight: 500;
 			color: #444;
+			font-size: 12px;
 		}
 
 		input[type=checkbox]+.lbl::before, input[type=radio]+.lbl::before {
@@ -1267,7 +1284,7 @@ body{
 		}
 		ul.eventlist li{
 		    border-bottom: 1px solid #EEE;
-            margin-bottom: 10px;
+            margin-bottom: 9px;
 		}
 		.todo a{
 			font-weight: 400;
@@ -1286,7 +1303,7 @@ body{
             width: -webkit-calc(100% - 60px);
         }
 		ul.dash-messages {
-		    margin-top: 0px;
+		    margin-top: 5px;
 			height: 235px;
 			overflow: hidden;
 		}
@@ -1300,7 +1317,7 @@ body{
 			margin-right: 10px;
 		}
 		ul.dash-messages li {
-			height: 43px;
+			height: 53px;
 		}
 		ul.dash-messages li h5{
 			color: #000;

@@ -63,7 +63,7 @@
 			<th class="hidden-xs"><?=$this->lang->line('application_owner');?></th>
 		</thead>
 		<?php foreach ($ticket as $value):?>
-			<?php $lable = FALSE; if($value->status == "new"){ $lable = "label-important"; }elseif($value->status == "open"){$lable = "label-warning";}elseif($value->status == "closed"){$lable = "label-success";}elseif($value->status == "reopened"){$lable = "label-warning";} ?>
+			<?php $lable = FALSE; if($value->status == "new"){ $lable = "label-important"; }elseif($value->status == "open"){$lable = "label-warning";}elseif($value->status == "closed" || $value->status == "inprogress"){$lable = "label-success";}elseif($value->status == "reopened"){$lable = "label-warning";} ?>
 		<tr id="<?=$value->id;?>" >
 			<td class="noclick simplecheckbox" style="width:16px"> <input class="checkbox-nolabel bulk-box" type="checkbox" name="bulk[]" value="<?=$value->id?>"></td>
 			<td  class="hidden-xs" style="width:70px"><?=$value->reference;?></td>

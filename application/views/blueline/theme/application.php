@@ -3,7 +3,7 @@
  * @file        Application View
  * @author      Luxsys <support@luxsys-apps.com>
  * @copyright   By Luxsys (http://www.luxsys-apps.com)
- * @version     2.2.0
+ * @version     2.2.4
  */
 
 $act_uri = $this->uri->segment(1, 0);
@@ -110,7 +110,7 @@ if(is_numeric($act_uri_submenu)){
                }
                
                ?>
-               <li id="<?=strtolower($value->name);?>"><a href="<?=site_url($value->link);?>"><span class="menu-icon"><i class="fa <?=$icon;?>"></i></span><span class="nav-text"><?php echo $this->lang->line('application_'.$value->link);?></span>
+               <li id="<?=strtolower($value->name);?>" class="<?php if ($act_uri == strtolower($value->name)) {echo "active";}?>"><a href="<?=site_url($value->link);?>"><span class="menu-icon"><i class="fa <?=$icon;?>"></i></span><span class="nav-text"><?php echo $this->lang->line('application_'.$value->link);?></span>
                 <?php if(strtolower($value->name) == "messages" && $messages_new[0]->amount != "0"){ ?><span class="notification-badge"><?=$messages_new[0]->amount;?></span><?php } ?>
                 <?php if(strtolower($value->name) == "quotations" && $quotations_new[0]->amount != "0"){ ?><span class="notification-badge"><?=$quotations_new[0]->amount;?></span><?php } ?>
                 <?php if(strtolower($value->name) == "tickets" && $tickets_new[0]->amount != "0"){ ?><span class="notification-badge"><?=$tickets_new[0]->amount;?></span><?php } ?>
@@ -127,19 +127,22 @@ if(is_numeric($act_uri_submenu)){
                 <?php foreach ($sticky as $value): ?>
                 
                     <li>
-                        <a href="#">
-                          <p class="truncate"><i class="fa fa-clock-o"></i> <?=$value->name;?> </p>
+                        <a href="<?=base_url()?>projects/view/<?=$value->id;?>">
+                          <p class="truncate"><i class="fa fa-clock-o <?php if(!empty($value->tracking)){echo "fa-spin";}?>"></i> <?=$value->name;?> </p>
                           <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?=$value->progress;?>%;"></div>
                           </div>
                         </a>
-                       <!-- <div class="submenu">
+                       <div class="submenu">
                             <ul>
-                              <li><a href="<?=base_url()?>projects/view/<?=$value->id;?>"><span class="menu-icon"><i class="fa fa-lightbulb-o"></i></span> <?=$this->lang->line('application_go_to_project');?></a></li>
-                              <li><a href="<?=base_url()?>projects/tracking/<?=$value->id;?>" id="<?=$value->id;?>"><span class="menu-icon"><i class="fa fa-clock-o"></i> </span><?php if(empty($value->tracking)){ echo $this->lang->line("application_start_timer");}else{echo $this->lang->line("application_stop_timer");} ?> [<span class="timer" id="runner_<?=$value->id;?>"></span>]</a></li>
+                            <?php if(isset($value->company->name)){ ?>
+                            <li class="underline"><a href="<?=base_url()?>clients/view/<?=$value->company_id;?>"><b><?=$value->company->name?></b></a></li>
+                            <?php } ?>
+                              <li><a href="<?=base_url()?>projects/view/<?=$value->id;?>"> <?=$this->lang->line('application_go_to_project');?></li>
+                              <li><a href="<?=base_url()?>projects/tracking/<?=$value->id;?>" id="<?=$value->id;?>"><?php if(empty($value->tracking)){ echo $this->lang->line("application_start_timer");}else{echo $this->lang->line("application_stop_timer");} ?></a></li>
                             </ul>
         
-                        </div>-->
+                        </div>
                     </li>
                    <?php endforeach; ?> 
             </ul>
@@ -165,8 +168,8 @@ if(is_numeric($act_uri_submenu)){
                         <ul>
                           <li><a href="#"><span class="menu-icon"><i class="fa fa-envelope-o"></i></span> <?=$this->lang->line('application_write_a_message');?></a></li>
                         </ul>
-    
-                    </div>-->
+    -->
+                    </div>
                 </li>
             <?php endforeach; ?> 
             </ul> 
@@ -225,15 +228,15 @@ if(is_numeric($act_uri_submenu)){
                                      <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
                                         <?php if ($handle = opendir('application/language/')) {
 
-									          while (false !== ($entry = readdir($handle))) {
-									              if ($entry != "." && $entry != "..") {
-									                ?><li><a href="<?=base_url()?>agent/language/<?=$entry;?>"><img src="<?=base_url()?>assets/blueline/img/<?=$entry;?>.png" class="language-img"> <?=ucwords($entry);?></a></li><?php
-									              }
-									          }
-									
-									          closedir($handle);
-									          } 
-									    ?>
+                            while (false !== ($entry = readdir($handle))) {
+                                if ($entry != "." && $entry != "..") {
+                                  ?><li><a href="<?=base_url()?>agent/language/<?=$entry;?>"><img src="<?=base_url()?>assets/blueline/img/<?=$entry;?>.png" class="language-img"> <?=ucwords($entry);?></a></li><?php
+                                }
+                            }
+                  
+                            closedir($handle);
+                            } 
+                      ?>
                       
                                       </ul>
             </span>

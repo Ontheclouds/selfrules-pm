@@ -145,6 +145,7 @@ class Messages extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['note-codable']);
+			unset($_POST['files']);
 			$message = $_POST['message'];
 			$receiverart = substr($_POST['recipient'], 0, 1);
 			$receiverid = substr($_POST['recipient'], 1, 9999);
@@ -192,6 +193,7 @@ class Messages extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['id'];
 			$message = Privatemessage::find($id);
 			$message->update_attributes($_POST);

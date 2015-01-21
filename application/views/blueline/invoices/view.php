@@ -6,6 +6,8 @@
 			<a href="<?=base_url()?>invoices/preview/<?=$invoice->id;?>" class="btn btn-primary"><i class="icon-file"></i> <?=$this->lang->line('application_preview');?></a>
 			<?php if($invoice->status != "Paid" && isset($invoice->company->name)){ ?><a href="<?=base_url()?>invoices/sendinvoice/<?=$invoice->id;?>" class="btn btn-primary"><i class="icon-envelope"></i> <?=$this->lang->line('application_send_invoice_to_client');?></a><?php } ?>
 
+            <a href="<?=base_url()?>invoice_pagata.php?invoice_id=<?=$invoice->id;?>&status=<?php echo $invoice->status == "Paid" ? 'paid' : null ?>" class="btn btn-primary" data-toggle="mainmodal"><i class="icon-edit"></i> Segna come  <?php if($invoice->status == "Paid") { ?>non <?php } ?>pagata</a>
+
               </div>
           </div>
           <div class="row">

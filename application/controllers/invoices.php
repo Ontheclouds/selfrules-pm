@@ -4,6 +4,9 @@ class Invoices extends MY_Controller {
                
 	function __construct()
 	{
+		
+ini_set('display_errors',1);  error_reporting(E_ALL);
+//echo "qui"; exit;
 		parent::__construct();
 		$access = FALSE;
 		if($this->client){	
@@ -74,6 +77,7 @@ class Invoices extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$invoice = Invoice::create($_POST);
 			$new_invoice_reference = $_POST['reference']+1;
 			
@@ -99,6 +103,7 @@ class Invoices extends MY_Controller {
 		if($_POST){
 			unset($_POST['send']);
 			unset($_POST['_wysihtml5_mode']);
+			unset($_POST['files']);
 			$id = $_POST['id'];
 			$view = FALSE;
 			if(isset($_POST['view'])){$view = $_POST['view']; }

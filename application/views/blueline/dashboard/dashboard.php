@@ -1,7 +1,9 @@
 <?php 
-if($update){ ?>
+if(isset($update)){
+if($this->user->admin == "1" && $update){
+ ?>
 <div class="newsbox"><a href="<?=base_url()?>settings/updates"><?=$this->lang->line('application_update_available');?> <?=$update?> <i class="fa fa-download"></i> </a></div>
-<?php } ?>
+<?php } }?>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4">
               <div class="stdpad"><h2><?=$this->lang->line('application_events');?><small> (<?=$eventcount;?>)</small></h2>
@@ -28,7 +30,7 @@ if($update){ ?>
     <div class="nano-content"><ul id="jp-container" class="todo jp-container">
                          <?php $count = 0;
                                 foreach ($tasks as $value):  $count = $count+1; ?>
-                                    <li class="<?=$value->status;?>">
+                                    <li class="<?=$value->status;?> priority<?=$value->priority;?>">
                                       <span class="lbl-"> 
                                         <p class="truncate"><input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/check/<?=$value->id;?>" <?=$value->status;?>/>
                                    <a href="<?=base_url()?>projects/view/<?=$value->project_id;?>"><?=$value->name;?></a></p></span> 

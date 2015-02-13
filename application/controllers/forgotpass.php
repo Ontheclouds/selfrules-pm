@@ -40,7 +40,7 @@ class Forgotpass extends MY_Controller
             					'logo' => '<img src="'.base_url().''.$data["core_settings"]->logo.'" alt="'.$data["core_settings"]->company.'"/>',
             					'invoice_logo' => '<img src="'.base_url().''.$data["core_settings"]->invoice_logo.'" alt="'.$data["core_settings"]->company.'"/>'
             					);
-	  			$email = read_file('./application/views/blackline/templates/email_pw_reset_link.html');
+	  			$email = read_file('./application/views/'.$data["core_settings"]->template.'/templates/email_pw_reset_link.html');
 	  			$message = $this->parser->parse_string($email, $parse_data);
 				$this->email->message($message);
 				$this->email->send();
@@ -91,7 +91,7 @@ class Forgotpass extends MY_Controller
 		            					'logo' => '<img src="'.base_url().''.$data["core_settings"]->logo.'" alt="'.$data["core_settings"]->company.'"/>',
 		            					'invoice_logo' => '<img src="'.base_url().''.$data["core_settings"]->invoice_logo.'" alt="'.$data["core_settings"]->company.'"/>'
 		            					);
-			  			$email = read_file('./application/views/blackline/templates/email_pw_reset.html');
+			  			$email = read_file('./application/views/'.$data["core_settings"]->template.'/templates/email_pw_reset.html');
 			  			$message = $this->parser->parse_string($email, $parse_data);
 						$this->email->message($message);
 						$this->email->send();

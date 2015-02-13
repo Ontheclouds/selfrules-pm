@@ -40,14 +40,14 @@
 		<div class="row">
 		<div class="col-md-12">
 		<div class="table-head"><?=$this->lang->line('application_invoice_items');?> </div>
-		<div class="table-div">
+		<div class="table-div min-height-200">
 		<table class="table" id="items" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
 		<thead>
 			<th><?=$this->lang->line('application_name');?></th>
 			<th class="hidden-xs"><?=$this->lang->line('application_description');?></th>
-			<th width="8%"><?=$this->lang->line('application_hrs_qty');?></th>
-			<th width="12%"><?=$this->lang->line('application_unit_price');?></th>
-			<th width="12%"><?=$this->lang->line('application_sub_total');?></th>
+			<th class="hidden-xs" width="8%"><?=$this->lang->line('application_hrs_qty');?></th>
+			<th class="hidden-xs" width="12%"><?=$this->lang->line('application_unit_price');?></th>
+			<th class="hidden-xs" width="12%"><?=$this->lang->line('application_sub_total');?></th>
 		</thead>
 		<?php $i = 0; $sum = 0;?>
 		<?php foreach ($items as $value):?>
@@ -55,9 +55,9 @@
 	
 			<td><?php if(!empty($value->name)){echo $value->name;}else{ echo $invoice->invoice_has_items[$i]->item->name; }?></td>
 			<td class="hidden-xs"><?=$invoice->invoice_has_items[$i]->description;?></td>
-			<td align="center"><?=$invoice->invoice_has_items[$i]->amount;?></td>
-			<td><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->value);?></td>
-			<td><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->amount*$invoice->invoice_has_items[$i]->value);?></td>
+			<td class="hidden-xs" align="center"><?=$invoice->invoice_has_items[$i]->amount;?></td>
+			<td class="hidden-xs"><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->value);?></td>
+			<td class="hidden-xs"><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->amount*$invoice->invoice_has_items[$i]->value);?></td>
 
 		</tr>
 		

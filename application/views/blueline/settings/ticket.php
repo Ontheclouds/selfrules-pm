@@ -97,10 +97,11 @@
 
 		<div class="form-group">
 			 <input type="submit" name="send" class="btn btn-primary" value="<?=$this->lang->line('application_save');?>"/>
-			 <a href="<?=base_url()?>settings/testpostmaster" class="btn" data-toggle="mainmodal"><?=$this->lang->line('application_postmaster_test');?></a>
+			 <a href="<?=base_url()?>settings/testpostmaster" class="btn btn-success" data-toggle="mainmodal"><?=$this->lang->line('application_postmaster_test');?></a>
 	
 	 	 
 			 </div>
+			 <br>
 		</div>
 		<br>
 

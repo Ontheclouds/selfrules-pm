@@ -15,7 +15,7 @@
  <?php endforeach;?>
           
       <?php } else{ ?>
-        <li><?=$this->lang->line('application_no_messages');?></li>
+        <li style="padding-left:21px"><?=$this->lang->line('application_no_messages');?></li>
         <?php } ?> 
 
 <script>

@@ -406,10 +406,10 @@ class Settings extends MY_Controller
 	function user_create()
 	{
 		if($_POST){
-				if(!empty($_POST['file-name'])){
+				
 					$config['upload_path'] = './files/media/';
 					$config['encrypt_name'] = TRUE;
-					$config['allowed_types'] = 'gif|jpg|png';
+					$config['allowed_types'] = 'gif|jpg|jpeg|png';
 					$config['max_width'] = '180';
 					$config['max_height'] = '180';
 
@@ -420,14 +420,8 @@ class Settings extends MY_Controller
 							$data = array('upload_data' => $this->upload->data());
 
 							$_POST['userpic'] = $data['upload_data']['file_name'];
-						}else{
-							$error = $this->upload->display_errors('', ' ');
-							if($error != "You did not select a file to upload."){
-								$this->session->set_flashdata('message', 'error:'.$error);
-								redirect('');
-							}
 						}
-					}
+					
 			unset($_POST['file-name']);
 			unset($_POST['send']);
 			unset($_POST['confirm_password']);
@@ -457,10 +451,10 @@ class Settings extends MY_Controller
  		$user = User::find($user);
 
  		if($_POST){
- 			if(!empty($_POST['file-name'])){
+ 			
 					$config['upload_path'] = './files/media/';
 					$config['encrypt_name'] = TRUE;
-					$config['allowed_types'] = 'gif|jpg|png';
+					$config['allowed_types'] = 'gif|jpg|jpeg|png';
 					$config['max_width'] = '180';
 					$config['max_height'] = '180';
 
@@ -471,14 +465,8 @@ class Settings extends MY_Controller
 							$data = array('upload_data' => $this->upload->data());
 
 							$_POST['userpic'] = $data['upload_data']['file_name'];
-						}else{
-							$error = $this->upload->display_errors('', ' ');
-							if($error != "You did not select a file to upload."){
-								$this->session->set_flashdata('message', 'error:'.$error);
-								redirect('');
-							}
 						}
-					}
+					
 		unset($_POST['file-name']);
  		unset($_POST['send']);
  		unset($_POST['confirm_password']);

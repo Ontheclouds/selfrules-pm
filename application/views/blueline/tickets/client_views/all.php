@@ -2,17 +2,7 @@
  
     <div class="row"> 
 			<a href="<?=base_url()?>ctickets/create" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_create_new_ticket');?></a>
-			<div class="btn-group pull-right-responsive margin-right-3">
-	          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-	            <?=$this->lang->line('application_queue');?> <span class="caret"></span>
-	          </button>
-			<ul class="dropdown-menu pull-right" role="menu">
-				<?php foreach ($queues as $value):?>
-	                <li><a id="" href="<?=base_url()?>ctickets/queues/<?=$value->id?>"><?=$value->name?></a></li>
-	            <?php endforeach;?>
-	            
-			</ul>
-			</div>
+			
 			<div class="btn-group pull-right-responsive margin-right-3">
 	          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 	            <?php $last_uri = $this->uri->segment($this->uri->total_segments()); if($last_uri != "ctickets"){echo $this->lang->line('application_'.$last_uri);}else{echo $this->lang->line('application_all');} ?> <span class="caret"></span>
@@ -55,7 +45,7 @@
 			<td  class="hidden-xs" style="width:70px"><?=$value->reference;?></td>
 			<td style="width:50px"><span class="label <?php echo $lable; ?>"><?=$this->lang->line('application_ticket_status_'.$value->status);?></span></td>
 			<?php if(isset($value->user->id)){$user_id = $value->user->id; }else{ $user_id = FALSE; }?>
-			<td  class="hidden-xs" style="width:15px"><?php if($value->updated == "1" && $user_id == $this->user->id){?><i class="fa fa-star"></i><?php }else{?> <i class="fa fa-star-o" style="opacity: 0.2;"></i><?php } ?></td>
+			<td  class="hidden-xs" style="width:15px"><?php if($value->updated == "1"){?><i class="fa fa-star"></i><?php }else{?> <i class="fa fa-star-o" style="opacity: 0.2;"></i><?php } ?></td>
 			<td><?=$value->subject;?></td>
 			<td class="hidden-xs"><span><?php if(isset($value->queue->name)){ echo $value->queue->name;}?></span></td>
 			<td class="hidden-xs"><?php if(!isset($value->company->name)){echo '<span class="label">'.$this->lang->line('application_no_client_assigned').'</span>'; }else{ echo '<span class="label label-info">'.$value->company->name.'</span>'; }?></td>

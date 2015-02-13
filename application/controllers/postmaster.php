@@ -64,7 +64,7 @@ class Postmaster extends MY_Controller {
 						    $ticket = Ticket::find_by_reference($matches[1]);
 						}
 
-						if(isset($ticket)){
+						if($ticket){
 								log_message('error', 'Fetched email merged to ticket #'.$matches[1]);
 								$article_attributes = array(
 										'ticket_id' => $ticket->id,

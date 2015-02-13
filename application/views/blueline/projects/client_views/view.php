@@ -90,7 +90,7 @@
         <thead>
         <tr>
                     <th  class="hidden"></th>
-					<th><?=$this->lang->line('application_name');?></th>
+					<th onclick=""><?=$this->lang->line('application_name');?></th>
 					<th class="hidden-xs"><?=$this->lang->line('application_filename');?></th>
 					<th class="hidden-xs"><?=$this->lang->line('application_phase');?></th>
 					<th class="hidden-xs"><i class="fa fa-download"></i></th>
@@ -102,7 +102,7 @@
 
 				<tr id="<?=$value->id;?>">
 					<td class="hidden"><?=human_to_unix($value->date);?></td>
-					<td><?=$value->name;?></td>
+					<td onclick=""><?=$value->name;?></td>
 					<td class="hidden-xs"><?=$value->filename;?></td>
 					<td class="hidden-xs"><?=$value->phase;?></td>
 					<td class="hidden-xs"><span class="label label-info tt" title="<?=$this->lang->line('application_download_counter');?>" ><?=$value->download_counter;?></span></td>
@@ -143,20 +143,18 @@
     <thead>
       <th width="70px"><?=$this->lang->line('application_invoice_id');?></th>
       <th><?=$this->lang->line('application_client');?></th>
-      <th class="hidden-phone"><?=$this->lang->line('application_issue_date');?></th>
-      <th class="hidden-phone"><?=$this->lang->line('application_due_date');?></th>
+      <th class="hidden-xs"><?=$this->lang->line('application_issue_date');?></th>
+      <th class="hidden-xs"><?=$this->lang->line('application_due_date');?></th>
       <th><?=$this->lang->line('application_status');?></th>
       <th><?=$this->lang->line('application_action');?></th>
     </thead>
-    <?php foreach ($project_has_invoices as $value):
-	if ($value) :
-	?>
+    <?php foreach ($project_has_invoices as $value):?>
 
     <tr id="<?=$value->id;?>" >
       <td><?=$value->reference;?></td>
       <td><span class="label label-info"><?php if(isset($value->company->name)){echo $value->company->name; }?></span></td>
-      <td class="hidden-phone"><span><?php $unix = human_to_unix($value->issue_date.' 00:00'); echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span></td>
-      <td class="hidden-phone"><span class="label <?php if($value->status == "Paid"){echo 'label-success';} if($value->due_date <= date('Y-m-d') && $value->status != "Paid"){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($value->due_date.' 00:00'); echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span> <span class="hidden"><?=$unix;?></span></td>
+      <td class="hidden-xs"><span><?php $unix = human_to_unix($value->issue_date.' 00:00'); echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span></td>
+      <td class="hidden-xs"><span class="label <?php if($value->status == "Paid"){echo 'label-success';} if($value->due_date <= date('Y-m-d') && $value->status != "Paid"){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($value->due_date.' 00:00'); echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span> <span class="hidden"><?=$unix;?></span></td>
       <td><span class="label <?php $unix = human_to_unix($value->sent_date.' 00:00'); if($value->status == "Paid"){echo 'label-success';}elseif($value->status == "Sent"){ echo 'label-warning tt" title="'.date($core_settings->date_format, $unix);} ?>"><?=$this->lang->line('application_'.$value->status);?></span></td>
     
       <td class="option" width="8%">
@@ -165,11 +163,7 @@
       </td>
     </tr>
 
-    <?php 
-	endif;
-	endforeach;
-	
-	?>
+    <?php endforeach;?>
     </table>
         <?php if(!$project_has_invoices) { ?>
         <div class="no-files">  

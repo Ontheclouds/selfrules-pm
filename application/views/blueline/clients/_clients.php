@@ -41,8 +41,8 @@ echo form_open_multipart($form_action, $attributes);
         <input id="city" type="text" name="city" class="form-control" value="<?php if(isset($client)){echo $client->city;}?>" />
 </div>
 <div class="form-group">
-        <label for="password"><?=$this->lang->line('application_password');?> *</label>
-        <input id="password" type="password" name="password" class="form-control" value="<?php if(isset($client)){echo $client->password;}?>" required />
+        <label for="password"><?=$this->lang->line('application_password');?> <?php if(!isset($client)){echo "*";}?></label>
+        <input id="password" type="password" name="password" class="form-control" value="<?php if(isset($client)){echo $client->password;}?>" <?php if(!isset($client)){echo "required";}?> />
 </div>
 <div class="form-group">
                 <label for="userfile"><?=$this->lang->line('application_profile_picture');?></label><div>

@@ -57,7 +57,7 @@ class cMessages extends MY_Controller {
 		$this->theme_view = 'ajax';
 		$this->content_view = 'messages/client/list';
 	}
-	function filter($condition = FALSE)
+	function filter($condition = FALSE, $con = FALSE)
 	{
 		$max_value = 20;
 	    if(is_numeric($con)){ $limit = $con.','; } else{$limit = FALSE;}
@@ -166,7 +166,7 @@ class cMessages extends MY_Controller {
        				$this->load->helper('notification');
        				send_notification($receiveremail, $this->lang->line('application_notification_new_message_subject'), $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>');
        			}
-			if($ajax != "reply"){ redirect('messages'); }else{
+			if($ajax != "reply"){ redirect('cmessages'); }else{
 					$this->theme_view = 'ajax';
 				}
 		}else

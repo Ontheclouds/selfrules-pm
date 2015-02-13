@@ -61,6 +61,15 @@
         $("#formcontent").text(payload);
       });
 
+
+      switch ( window.orientation ) {
+
+    case 0:
+        alert('Please turn your phone sideways in order to use this page!');
+    break;
+
+}
+
     });
   </script>  
 </div></div></div>

@@ -4,9 +4,9 @@
               <div class="col-xs-12 col-sm-12">
                   <a class="btn btn-primary" href="<?=base_url()?>projects/update/<?=$project->id;?>" data-toggle="mainmodal" data-target="#mainModal"><?=$this->lang->line('application_edit_this_project');?></a>
                   <?php if($project->sticky == 0){ ?>
-        				<a href="<?=base_url()?>projects/sticky/<?=$project->id;?>" class="btn btn-primary"><i class="fa fa-star"></i> <?=$this->lang->line('application_add_to_quick_access');?></a>
+        				<a href="<?=base_url()?>projects/sticky/<?=$project->id;?>" class="btn btn-primary hidden-xs"><i class="fa fa-star"></i> <?=$this->lang->line('application_add_to_quick_access');?></a>
         			<?php }else{ ?>
-        				<a href="<?=base_url()?>projects/sticky/<?=$project->id;?>" class="btn btn-primary"><i class="fa fa-star-o"></i> <?=$this->lang->line('application_remove_from_quick_access');?></a>
+        				<a href="<?=base_url()?>projects/sticky/<?=$project->id;?>" class="btn btn-primary hidden-xs"><i class="fa fa-star-o"></i> <?=$this->lang->line('application_remove_from_quick_access');?></a>
         			<?php } ?>
                   
                   
@@ -23,7 +23,7 @@
           <div class="row">
               
               <div class="col-xs-12 col-sm-12">
-                  <h1><?=$project->name;?></h1>
+                  <h1><span class="nobold">#<?=$project->reference;?></span> - <?=$project->name;?></h1>
                   <p class="truncate description"><?=$project->description;?></p>
                   <div class="progress tt" title="<?=$project->progress;?>%">
                     <div class="progress-bar <?php if($project->progress== "100"){ ?>done<?php } ?>" role="progressbar" aria-valuenow="<?=$project->progress;?>"  aria-valuemin="0" aria-valuemax="100" style="width: <?=$project->progress;?>%;"></div>
@@ -38,7 +38,7 @@
                     <li><span><?=$this->lang->line('application_category');?>:</span> <?=$project->category;?></li>
                     <li><span><?=$this->lang->line('application_client');?>:</span> <?php if(!isset($project->company->name)){ ?> <a href="#" class="label label-default"><?php echo $this->lang->line('application_no_client_assigned'); }else{ ?><a class="label label-success" href="<?=base_url()?>clients/view/<?=$project->company->id;?>"><?php echo $project->company->name;} ?></a></li>
 				<li><span><?=$this->lang->line('application_assigned_to');?>:</span> <?php foreach ($project->project_has_workers as $workers):?> <a class="label label-info" style="padding: 2px 5px 3px;"><?php echo $workers->user->firstname." ".$workers->user->lastname;?></a><?php endforeach;?> <a href="<?=base_url()?>projects/assign/<?=$project->id;?>" class="label label-info tt" style="padding: 2px 5px 3px;" title="<?=$this->lang->line('application_assign_to');?>" data-toggle="mainmodal"><i class="fa fa-plus"></i></a></li>
-				<span class="visible-phone"/></span>
+				
                   </ul>
                   <ul class="details col-xs-12 col-sm-6"><span class="visible-xs divider"></span>
                     <li><span><?=$this->lang->line('application_start_date');?>:</span> <?php  $unix = human_to_unix($project->start.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
@@ -123,8 +123,8 @@
 
 				<tr id="<?=$value->id;?>">
 					<td class="hidden"><?=human_to_unix($value->date);?></td>
-					<td><?=$value->name;?></td>
-					<td class="hidden-xs"><?=$value->filename;?></td>
+					<td onclick=""><?=$value->name;?></td>
+					<td class="hidden-xs truncate" style="max-width: 80px;"><?=$value->filename;?></td>
 					<td class="hidden-xs"><?=$value->phase;?></td>
 					<td class="hidden-xs"><span class="label label-info tt" title="<?=$this->lang->line('application_download_counter');?>" ><?=$value->download_counter;?></span></td>
 					<td class="option " width="10%">
@@ -162,26 +162,26 @@
 <div class="row">
  <div class="col-xs-12 col-sm-12">
  <div class="table-head"><?=$this->lang->line('application_invoices');?> <span class=" pull-right"></span></div>
-<div class="table-div min-height-410">
+<div class="table-div">
  <table class="data table" id="invoices" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
     <thead>
-      <th width="70px"><?=$this->lang->line('application_invoice_id');?></th>
+      <th width="70px" class="hidden-xs"><?=$this->lang->line('application_invoice_id');?></th>
       <th><?=$this->lang->line('application_client');?></th>
       <th class="hidden-xs"><?=$this->lang->line('application_issue_date');?></th>
       <th class="hidden-xs"><?=$this->lang->line('application_due_date');?></th>
       <th><?=$this->lang->line('application_status');?></th>
-      <th><?=$this->lang->line('application_action');?></th>
+      <th class="hidden-xs"><?=$this->lang->line('application_action');?></th>
     </thead>
     <?php foreach ($project_has_invoices as $value):?>
 
     <tr id="<?=$value->id;?>" >
-      <td><?=$value->reference;?></td>
-      <td><span class="label label-info"><?php if(isset($value->company->name)){echo $value->company->name; }?></span></td>
+      <td class="hidden-xs" onclick=""><?=$value->reference;?></td>
+      <td onclick=""><span class="label label-info"><?php if(isset($value->company->name)){echo $value->company->name; }?></span></td>
       <td class="hidden-xs"><span><?php $unix = human_to_unix($value->issue_date.' 00:00'); echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span></td>
       <td class="hidden-xs"><span class="label <?php if($value->status == "Paid"){echo 'label-success';} if($value->due_date <= date('Y-m-d') && $value->status != "Paid"){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($value->due_date.' 00:00'); echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span> <span class="hidden"><?=$unix;?></span></td>
-      <td><span class="label <?php $unix = human_to_unix($value->sent_date.' 00:00'); if($value->status == "Paid"){echo 'label-success';}elseif($value->status == "Sent"){ echo 'label-warning tt" title="'.date($core_settings->date_format, $unix);} ?>"><?=$this->lang->line('application_'.$value->status);?></span></td>
+      <td onclick=""><span class="label <?php $unix = human_to_unix($value->sent_date.' 00:00'); if($value->status == "Paid"){echo 'label-success';}elseif($value->status == "Sent"){ echo 'label-warning tt" title="'.date($core_settings->date_format, $unix);} ?>"><?=$this->lang->line('application_'.$value->status);?></span></td>
     
-      <td class="option" width="8%">
+      <td class="option hidden-xs" width="8%">
                 <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>invoices/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a> <button class='btn po-close'><?=$this->lang->line('application_no');?></button> <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>"><i class="fa fa-times"></i></button>
                 <a href="<?=base_url()?>invoices/update/<?=$value->id;?>" class="btn-option" data-toggle="mainmodal"><i class="fa fa-cog"></i></a>
       </td>

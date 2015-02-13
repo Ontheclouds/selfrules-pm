@@ -32,7 +32,7 @@
                   <tr>
                       <th class="hidden-xs"><?=$this->lang->line('application_project_id');?></th>
                       <th><?=$this->lang->line('application_name');?></th>
-                      <th><?=$this->lang->line('application_client');?></th>
+                      <th class="hidden-xs"><?=$this->lang->line('application_client');?></th>
                       <th class="hidden-xs"><?=$this->lang->line('application_deadline');?></th>
                       <th class="hidden-xs"><?=$this->lang->line('application_progress');?></th>
                       <th><?=$this->lang->line('application_action');?></th>
@@ -44,10 +44,10 @@
         			foreach($value->project_has_workers as $worker){ array_push($workers, $worker->user_id);}
         			if($this->user->admin == "1" || in_array($this->user->id, $workers)){ ?>
                 <tr id="<?=$value->id;?>">
-                  <td><?=$value->reference;?></td>
-                  <td><?=$value->name;?></td>
-                  <td><a class="label label-info"><?php if(!isset($value->company->name)){echo $this->lang->line('application_no_client_assigned'); }else{ echo $value->company->name; }?></a></td>
-                  <td><span class="hidden-xs label label-success <?php if($value->end <= date('Y-m-d') && $value->progress != 100){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($value->end.' 00:00');echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span></td>
+                  <td class="hidden-xs"><?=$value->reference;?></td>
+                  <td onclick=""><?=$value->name;?></td>
+                  <td class="hidden-xs"><a class="label label-info"><?php if(!isset($value->company->name)){echo $this->lang->line('application_no_client_assigned'); }else{ echo $value->company->name; }?></a></td>
+                  <td class="hidden-xs"><span class="hidden-xs label label-success <?php if($value->end <= date('Y-m-d') && $value->progress != 100){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($value->end.' 00:00');echo '<span class="hidden">'.$unix.'</span> '; echo date($core_settings->date_format, $unix);?></span></td>
 
                   <td class="hidden-xs"><div class="progress progress-striped active progress-medium tt <?php if($value->progress== "100"){ ?>progress-success<?php } ?>" title="<?=$value->progress;?>%">
                       <div class="bar" style="width:<?=$value->progress;?>%"></div>
@@ -55,7 +55,6 @@
                   <td class="option" width="8%">
 				        <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>projects/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a> <button class='btn po-close'><?=$this->lang->line('application_no');?></button> <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>"><i class="fa fa-times"></i></button>
 				        <a href="<?=base_url()?>projects/update/<?=$value->id;?>" class="btn-option" data-toggle="mainmodal"><i class="fa fa-cog"></i></a>
-				        <a href="<?=base_url()?>projects/view/<?=$value->id;?>" class="btn-option"><i class="fa fa-search"></i></a>
 			       </td>
                 </tr>
                 <?php } ?>

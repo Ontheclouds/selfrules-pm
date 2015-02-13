@@ -30,7 +30,7 @@ if($this->user->admin == "1" && $update){
     <div class="nano-content"><ul id="jp-container" class="todo jp-container">
                          <?php $count = 0;
                                 foreach ($tasks as $value):  $count = $count+1; ?>
-                                    <li class="<?=$value->status;?> priority<?=$value->priority;?>">
+                                    <li class="<?=$value->status;?>">
                                       <span class="lbl-"> 
                                         <p class="truncate"><input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/check/<?=$value->id;?>" <?=$value->status;?>/>
                                    <a href="<?=base_url()?>projects/view/<?=$value->project_id;?>"><?=$value->name;?></a></p></span> 
@@ -84,7 +84,7 @@ if($this->user->admin == "1" && $update){
                                           ?>
                                         ">
                                     <h5><?php if(isset($value->sender_u)){echo $value->sender_u;}else{ echo $value->sender_c; } ?> <small><?php echo time_ago($value->time); ?></small></h5>
-                                    <p class="truncate" style="width:80%"><span> <?php if($value->status == "New"){ echo '<span class="label label-info">'.$this->lang->line('application_'.$value->status).'</span>';}?> <?=$value->subject;?></span></p>
+                                    <p class="truncate" style="width:80%"><span> <?php if($value->status == "New"){ echo '<span class="new"><i class="fa fa-circle-o"></i></span>';}?> <?=$value->subject;?></span></p>
                                     </a>
                                 </li>
                             <?php endforeach;?>

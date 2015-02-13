@@ -1,14 +1,19 @@
 <div class="col-sm-12  col-md-12 main">  
 	<div id="options" class="row">
-			<a href="<?=base_url()?>quotations" class="btn btn-primary"><?=$this->lang->line('application_custom_quotations');?></a>
+			<a href="<?=base_url()?>quotations" class="btn btn-primary"><i class="fa fa-arrow-left visible-xs"></i> <span class="hidden-xs"><?=$this->lang->line('application_custom_quotations');?></span></a>
 			<a href="<?=base_url()?>quotations/formbuilder" class="btn btn-primary"><?=$this->lang->line('application_create_quotation');?></a>
 			
-			<div class="btn-group margintop5 pull-right nav-tabs" data-toggle="buttons-radio">
-				<?php foreach ($submenu as $name=>$value):?>
-	                <a class="btn btn-primary" id="<?php $val_id = explode("/", $value); if(!is_numeric(end($val_id))){echo end($val_id);}else{$num = count($val_id)-2; echo $val_id[$num];} ?>" href="<?=site_url($value);?>"><?=$name?></a>
-	            <?php endforeach;?>
-	            
-			</div>
+			
+			<div class="btn-group pull-right-responsive margin-right-3">
+		          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+		            <?php $last_uri = $this->uri->segment($this->uri->total_segments()); if($last_uri != "quotations"){echo $this->lang->line('application_status');}else{echo $this->lang->line('application_all');} ?> <span class="caret"></span>
+		          </button>
+		          <ul class="dropdown-menu pull-right" role="menu">
+		            <?php foreach ($submenu as $name=>$value):?>
+			                <li><a id="<?php $val_id = explode("/", $value); if(!is_numeric(end($val_id))){echo end($val_id);}else{$num = count($val_id)-2; echo $val_id[$num];} ?>" href="<?=site_url($value);?>"><?=$name?></a></li>
+			            <?php endforeach;?>
+		          </ul>
+		      </div>
 			<script type="text/javascript">$(document).ready(function() { 
 	            	$('.nav-tabs #<?php $last_uri = end(explode("/", uri_string())); if($val_id[count($val_id)-2] != "filter"){echo end($val_id);}else{ echo $last_uri;} ?>').button('toggle'); });
 	        </script> 

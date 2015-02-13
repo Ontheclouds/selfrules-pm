@@ -63,7 +63,7 @@
 		<div class="row">
 		<div class="col-xs-12 col-sm-12">
 		<div class="table-head"><?=$this->lang->line('application_subscription_items');?> </div>
-		<div class="table-div">
+		<div class="table-div min-height-200">
 		<table id="items" class="table" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
 		<thead>
 		

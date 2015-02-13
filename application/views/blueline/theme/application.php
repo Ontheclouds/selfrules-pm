@@ -3,7 +3,7 @@
  * @file        Application View
  * @author      Luxsys <support@luxsys-apps.com>
  * @copyright   By Luxsys (http://www.luxsys-apps.com)
- * @version     2.2.4
+ * @version     2.2.0
  */
 
 $act_uri = $this->uri->segment(1, 0);
@@ -28,10 +28,9 @@ if(is_numeric($act_uri_submenu)){
     
     <script src="<?=base_url()?>assets/blueline/js/plugins/jquery-1.11.0.min.js"></script>
 
-
     <!-- Custom styles for this template -->
     
-    <!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/bootstrap.min.css">
     <!-- Plugins -->
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/plugins/jquery-ui-1.10.3.custom.min.css" />
@@ -67,7 +66,7 @@ if(is_numeric($act_uri_submenu)){
 <body>
 <div id="mainwrapper">
  <a href="#" class="menu-trigger"><i class="fa fa-bars visible-xs"></i></a>
-    <div class="side hidden-xs">
+    <div class="side">
     <div class="sidebar-bg"></div>
         <div class="sidebar">
         <div class="navbar-header">
@@ -204,21 +203,22 @@ if(is_numeric($act_uri_submenu)){
         </div>
     </div>
 
-    <div class="content-area">
+    <div class="content-area" onclick="">
       <div class="row mainnavbar">
       <div class="topbar">
-      
-      <img style="margin-top: -3px;" src="
-               <?php 
+      <?php 
                 if($this->user->userpic != 'no-pic.png'){
-                  echo base_url()."files/media/".$this->user->userpic;
+                  $userimage = base_url()."files/media/".$this->user->userpic;
                 }else{
-                  echo get_gravatar($this->user->email);
+                  $userimage = get_gravatar($this->user->email);
                 }
-                 ?>" height="14px">
-       <span class="hidden-xs"><?php echo character_limiter($this->user->firstname." ".$this->user->lastname, 25);?> </span>
-      <span><a href="<?=site_url("messages");?>" title="<?=$this->lang->line('application_messages');?>"><i class="fa fa-inbox"></i></a></span>
-      <span><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><i class="fa fa-cog"></i></a></span>
+                 ?>
+      <span class="inline visible-xs"><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><img class="img-circle topbar-userpic" src="<?=$userimage;?>" height="21px"></a></span>
+      <img class="img-circle topbar-userpic hidden-xs" src="<?=$userimage;?>" height="21px">
+      
+      <span class="hidden-xs"><?php echo character_limiter($this->user->firstname." ".$this->user->lastname, 25);?> </span>
+      <span class="hidden-xs"><a href="<?=site_url("messages");?>" title="<?=$this->lang->line('application_messages');?>"><i class="fa fa-inbox"></i></a></span>
+      <span class="hidden-xs"><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><i class="fa fa-cog"></i></a></span>
       <span class="btn-group">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                       <?php if(!empty($core_settings->language)){$default_language = $core_settings->language; }else{ $default_language = "english"; } ?>
@@ -228,15 +228,15 @@ if(is_numeric($act_uri_submenu)){
                                      <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
                                         <?php if ($handle = opendir('application/language/')) {
 
-                            while (false !== ($entry = readdir($handle))) {
-                                if ($entry != "." && $entry != "..") {
-                                  ?><li><a href="<?=base_url()?>agent/language/<?=$entry;?>"><img src="<?=base_url()?>assets/blueline/img/<?=$entry;?>.png" class="language-img"> <?=ucwords($entry);?></a></li><?php
-                                }
-                            }
-                  
-                            closedir($handle);
-                            } 
-                      ?>
+									          while (false !== ($entry = readdir($handle))) {
+									              if ($entry != "." && $entry != "..") {
+									                ?><li><a href="<?=base_url()?>agent/language/<?=$entry;?>"><img src="<?=base_url()?>assets/blueline/img/<?=$entry;?>.png" class="language-img"> <?=ucwords($entry);?></a></li><?php
+									              }
+									          }
+									
+									          closedir($handle);
+									          } 
+									    ?>
                       
                                       </ul>
             </span>
@@ -395,9 +395,12 @@ if(is_numeric($act_uri_submenu)){
           },
           fnDrawCallback: function (settings) {
               $(this).parent().toggle(settings.fnRecordsDisplay() > 0);
-              
+              if (settings._iDisplayLength > settings.fnRecordsDisplay()) {
+            $(settings.nTableWrapper).find('.dataTables_paginate').hide();
+        }
 
           }
+
         });
         $('table.data-sorting').dataTable({
           "iDisplayLength": 25,

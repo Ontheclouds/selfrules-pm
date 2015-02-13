@@ -122,18 +122,19 @@ if(is_numeric($act_uri_submenu)){
     <div class="content-area">
       <div class="row mainnavbar">
       <div class="topbar">
-      
-      <img style="margin-top: -3px;" src="
-               <?php 
+      <?php 
                 if($this->client->userpic != 'no-pic.png'){
-                  echo base_url()."files/media/".$this->client->userpic;
+                  $userimage = base_url()."files/media/".$this->client->userpic;
                 }else{
-                  echo get_gravatar($this->client->email);
+                  $userimage = get_gravatar($this->client->email);
                 }
-                 ?>" height="14px">
-       <span class="hidden-xs"><?php echo character_limiter($this->client->firstname." ".$this->client->lastname, 25);?> </span>
-      <span><a href="<?=site_url("cmessages");?>" title="<?=$this->lang->line('application_messages');?>"><i class="fa fa-inbox"></i></a></span>
-      <span><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><i class="fa fa-cog"></i></a></span>
+                 ?>
+      <span class="inline visible-xs"><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><img class="img-circle topbar-userpic" src="<?=$userimage;?>" height="21px"></a></span>
+      <img class="img-circle topbar-userpic hidden-xs" src="<?=$userimage;?>" height="21px">
+      
+      <span class="hidden-xs"><?php echo character_limiter($this->client->firstname." ".$this->client->lastname, 25);?> </span>
+      <span class="hidden-xs"><a href="<?=site_url("cmessages");?>" title="<?=$this->lang->line('application_messages');?>"><i class="fa fa-inbox"></i></a></span>
+      <span class="hidden-xs"><a href="<?=site_url("agent");?>" data-toggle="mainmodal" title="<?=$this->lang->line('application_profile');?>"><i class="fa fa-cog"></i></a></span>
       <span class="btn-group">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                       <?php if(!empty($core_settings->language)){$default_language = $core_settings->language; }else{ $default_language = "english"; } ?>

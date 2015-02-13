@@ -1,10 +1,10 @@
  
           <div class="row">
               <div class="col-xs-12 col-sm-12">
-            <a href="<?=base_url()?>invoices/update/<?=$invoice->id;?>/view" class="btn btn-primary" data-toggle="mainmodal"><i class="icon-edit"></i> <?=$this->lang->line('application_edit_invoice');?></a>
-			<a href="<?=base_url()?>invoices/item/<?=$invoice->id;?>" class="btn btn-primary" data-toggle="mainmodal"><i class="icon-plus-sign"></i> <?=$this->lang->line('application_add_item');?></a>
-			<a href="<?=base_url()?>invoices/preview/<?=$invoice->id;?>" class="btn btn-primary"><i class="icon-file"></i> <?=$this->lang->line('application_preview');?></a>
-			<?php if($invoice->status != "Paid" && isset($invoice->company->name)){ ?><a href="<?=base_url()?>invoices/sendinvoice/<?=$invoice->id;?>" class="btn btn-primary"><i class="icon-envelope"></i> <?=$this->lang->line('application_send_invoice_to_client');?></a><?php } ?>
+            <a href="<?=base_url()?>invoices/update/<?=$invoice->id;?>/view" class="btn btn-primary" data-toggle="mainmodal"><i class="fa fa-edit visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_edit_invoice');?></span></a>
+			<a href="<?=base_url()?>invoices/item/<?=$invoice->id;?>" class="btn btn-primary" data-toggle="mainmodal"><i class="fa fa-plus visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_add_item');?></span></a>
+			<a href="<?=base_url()?>invoices/preview/<?=$invoice->id;?>" class="btn btn-primary"><i class="fa fa-file visible-xs-*"></i><span class="hidden-xs"><?=$this->lang->line('application_preview');?></span></a>
+			<?php if($invoice->status != "Paid" && isset($invoice->company->name)){ ?><a href="<?=base_url()?>invoices/sendinvoice/<?=$invoice->id;?>" class="btn btn-primary"><i class="fa fa-envelope visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_send_invoice_to_client');?></span></a><?php } ?>
 
             <a href="<?=base_url()?>invoice_pagata.php?invoice_id=<?=$invoice->id;?>&status=<?php echo $invoice->status == "Paid" ? 'paid' : null ?>" class="btn btn-primary" data-toggle="mainmodal"><i class="icon-edit"></i> Segna come  <?php if($invoice->status == "Paid") { ?>non <?php } ?>pagata</a>
 
@@ -22,7 +22,7 @@
 			</a>
 			</li>
 			<li><span><?=$this->lang->line('application_issue_date');?>:</span> <?php $unix = human_to_unix($invoice->issue_date.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
-			<li><span><?=$this->lang->line('application_due_date');?>:</span> <a class="label <?php if($invoice->status == "Paid"){echo 'label-success';} if($invoice->due_date <= date('Y-m-d') && $invoice->status != "Paid"){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($invoice->due_date.' 00:00'); echo date($core_settings->date_format, $unix);?></a></li>
+			<li><span><?=$this->lang->line('application_due_date');?>:</span> <a class="label label-default <?php if($invoice->status == "Paid"){echo 'label-success';} if($invoice->due_date <= date('Y-m-d') && $invoice->status != "Paid"){ echo 'label-important tt" title="'.$this->lang->line('application_overdue'); } ?>"><?php $unix = human_to_unix($invoice->due_date.' 00:00'); echo date($core_settings->date_format, $unix);?></a></li>
 			<?php if(isset($invoice->company->vat)){?> 
 			<li><span><?=$this->lang->line('application_vat');?>:</span> <?php echo $invoice->company->vat; ?></li>
 			<?php } ?>
@@ -49,16 +49,16 @@
 
 		<div class="row">
 		<div class="col-md-12">
-		<div class="table-head"><?=$this->lang->line('application_invoice_items');?> <span class=" pull-right"><a href="<?=base_url()?>invoices/item/<?=$invoice->id;?>" class="btn btn-md btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_add_item');?></a></span></div>
-		<div class="table-div">
+		<div class="table-head"><?=$this->lang->line('application_invoice_items');?> <span class=" pull-right"><a href="<?=base_url()?>invoices/item/<?=$invoice->id;?>" class="btn btn-md btn-primary" data-toggle="mainmodal"><i class="fa fa fa-plus visible-xs-*"></i><span class="hidden-xs"><?=$this->lang->line('application_add_item');?></span></a></span></div>
+		<div class="table-div min-height-200">
 		<table class="table" id="items" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
 		<thead>
 		<th width="4%"><?=$this->lang->line('application_action');?></th>
 			<th><?=$this->lang->line('application_name');?></th>
 			<th class="hidden-xs"><?=$this->lang->line('application_description');?></th>
-			<th width="8%"><?=$this->lang->line('application_hrs_qty');?></th>
-			<th width="12%"><?=$this->lang->line('application_unit_price');?></th>
-			<th width="12%"><?=$this->lang->line('application_sub_total');?></th>
+			<th class="hidden-xs" width="8%"><?=$this->lang->line('application_hrs_qty');?></th>
+			<th class="hidden-xs" width="12%"><?=$this->lang->line('application_unit_price');?></th>
+			<th class="hidden-xs" width="12%"><?=$this->lang->line('application_sub_total');?></th>
 		</thead>
 		<?php $i = 0; $sum = 0;?>
 		<?php foreach ($items as $value):?>
@@ -70,9 +70,9 @@
 	
 			<td><?php if(!empty($value->name)){echo $value->name;}else{ echo $invoice->invoice_has_items[$i]->item->name; }?></td>
 			<td class="hidden-xs"><?=$invoice->invoice_has_items[$i]->description;?></td>
-			<td align="center"><?=$invoice->invoice_has_items[$i]->amount;?></td>
-			<td><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->value);?></td>
-			<td><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->amount*$invoice->invoice_has_items[$i]->value);?></td>
+			<td class="hidden-xs" align="center"><?=$invoice->invoice_has_items[$i]->amount;?></td>
+			<td class="hidden-xs"><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->value);?></td>
+			<td class="hidden-xs"><?php echo sprintf("%01.2f",$invoice->invoice_has_items[$i]->amount*$invoice->invoice_has_items[$i]->value);?></td>
 
 		</tr>
 		

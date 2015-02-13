@@ -45,7 +45,7 @@
 			<th style="width:10px"></th>
 			<th><?=$this->lang->line('application_name');?></th>
 			<th class="hidden-xs"><?=$this->lang->line('application_email');?></th>
-			<th><?=$this->lang->line('application_phone');?></th>
+			<th class="hidden-xs"><?=$this->lang->line('application_phone');?></th>
 			<th class="hidden-xs"><?=$this->lang->line('application_mobile');?></th>
 			<th class="hidden-xs"><?=$this->lang->line('application_last_login');?></th>
 			<th><?=$this->lang->line('application_action');?></th>
@@ -64,11 +64,11 @@
                 " /></td>
 			<td><?=$value->firstname;?> <?=$value->lastname;?></td>
 			<td class="hidden-xs"><?=$value->email;?></td>
-			<td><?=$value->phone;?></td>
+			<td class="hidden-xs"><?=$value->phone;?></td>
 			<td class="hidden-xs"><?=$value->mobile;?></td>
 			<td class="hidden-xs"><?php if(!empty($value->last_login)){ echo date($core_settings->date_format.' '.$core_settings->date_time_format, $value->last_login); } else{echo "-";} ?></td>
 
-			<td class="option" style="text-align:left;" width="9%">
+			<td class="option" style="text-align:left; text-wrap:nowrap " width="9%">
 						<a  href="<?=base_url()?>clients/credentials/<?=$value->id;?>" class="btn-option tt" title="<?=$this->lang->line('application_email_login_details');?>" data-toggle="mainmodal"><i class="fa fa-envelope"></i></a>
 				        <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>clients/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a> <button class='btn po-close'><?=$this->lang->line('application_no');?></button> <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>"><i class="fa fa-times"></i></button>
 				        <a href="<?=base_url()?>clients/update/<?=$value->id;?>" title="<?=$this->lang->line('application_edit');?>" class="btn-option" data-toggle="mainmodal"><i class="fa fa-cog"></i></a>

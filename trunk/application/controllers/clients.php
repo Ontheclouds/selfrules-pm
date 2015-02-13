@@ -101,6 +101,7 @@ class Clients extends MY_Controller {
 			unset($_POST['send']);
 			unset($_POST['userfile']);
 			unset($_POST['file-name']);
+			if(empty($_POST["password"])){unset($_POST['password']);}
 			if(!empty($_POST["access"])){$_POST["access"] = implode(",", $_POST["access"]);}
 			$id = $_POST['id'];
 			if(isset($_POST['view'])){
@@ -241,7 +242,7 @@ class Clients extends MY_Controller {
             					'invoice_logo' => '<img src="'.base_url().''.$setting->invoice_logo.'" alt="'.$setting->company.'"/>'
             					);
 			
-			$message = read_file('./application/views/blackline/templates/email_credentials.html');
+			$message = read_file('./application/views/'.$setting->template.'/templates/email_credentials.html');
   			$message = $this->parser->parse_string($message, $parse_data);
 			$this->email->message($message);
 			if($this->email->send()){$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_send_login_details_success'));}

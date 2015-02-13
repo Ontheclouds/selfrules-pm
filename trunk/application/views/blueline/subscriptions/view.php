@@ -1,12 +1,12 @@
 <div class="row">
         <div class="col-xs-12 col-sm-12">
-			<a href="<?=base_url()?>subscriptions/update/<?=$subscription->id;?>/view" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_edit_subscription');?></a>
-			<a href="<?=base_url()?>subscriptions/item/<?=$subscription->id;?>" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_add_item');?></a>
-			<div class="visible-xs"><br/></div>
+			<a href="<?=base_url()?>subscriptions/update/<?=$subscription->id;?>/view" class="btn btn-primary" data-toggle="mainmodal"><i class="fa fa-edit visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_edit_subscription');?></span></a>
+			<a href="<?=base_url()?>subscriptions/item/<?=$subscription->id;?>" class="btn btn-primary" data-toggle="mainmodal"><i class="fa fa-plus visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_add_item');?></span></a>
+
 			<?php  if($subscription->end_date > $subscription->next_payment && date("Y-m-d") >= date('Y-m-d', strtotime('-3 day', strtotime ($subscription->next_payment)))){ ?>
-			<a href="<?=base_url()?>subscriptions/create_invoice/<?=$subscription->id;?>" class="btn btn-primary"><?=$this->lang->line('application_create_invoice');?></a>
+			<a href="<?=base_url()?>subscriptions/create_invoice/<?=$subscription->id;?>" class="btn btn-primary"><i class="fa fa-file-o visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_create_invoice');?></span></a>
 			<?php } ?>
-			<?php if($subscription->status != "Paid" && isset($subscription->company->name)){ ?><a href="<?=base_url()?>subscriptions/sendsubscription/<?=$subscription->id;?>" class="btn btn-primary"><?=$this->lang->line('application_send_subscription_to_client');?></a><?php } ?>
+			<?php if($subscription->status != "Paid" && isset($subscription->company->name)){ ?><a href="<?=base_url()?>subscriptions/sendsubscription/<?=$subscription->id;?>" class="btn btn-primary"><i class="fa fa-envelope visible-xs"></i><span class="hidden-xs"><?=$this->lang->line('application_send_subscription_to_client');?></span></a><?php } ?>
 			<?php if($core_settings->paypal == "1" && isset($subscription->subscription_has_items[0]) && $subscription->subscribed == "0"){ ?>
 			<a href="javascript:document.forms['paypal_subscribe'].submit();" class="btn btn-success pull-right"><?=$this->lang->line('application_subscribe_via_paypal');?></a>
 			<?php } ?>
@@ -70,14 +70,14 @@
 		<div class="row">
 		<div class="col-xs-12 col-sm-12">
 		<div class="table-head"><?=$this->lang->line('application_subscription_items');?> <span class="pull-right"><a href="<?=base_url()?>subscriptions/item/<?=$subscription->id;?>" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_add_item');?></a></span></div>
-		<div class="table-div">
+		<div class="table-div min-height-200">
 		<table id="items" class="table" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
 		<thead>
 		<th width="4%"><?=$this->lang->line('application_action');?></th>
 			<th><?=$this->lang->line('application_name');?></th>
 			<th class="hidden-xs"><?=$this->lang->line('application_description');?></th>
-			<th width="8%"><?=$this->lang->line('application_hrs_qty');?></th>
-			<th width="12%"><?=$this->lang->line('application_unit_price');?></th>
+			<th class="hidden-xs" width="8%"><?=$this->lang->line('application_hrs_qty');?></th>
+			<th class="hidden-xs" width="12%"><?=$this->lang->line('application_unit_price');?></th>
 			<th width="12%"><?=$this->lang->line('application_sub_total');?></th>
 		</thead>
 		<?php $i = 0; $sum = 0;?>
@@ -87,10 +87,10 @@
 				        <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>subscriptions/item_delete/<?=$subscription->subscription_has_items[$i]->id;?>/<?=$subscription->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a> <button class='btn po-close'><?=$this->lang->line('application_no');?></button> <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>"><i class="fa fa-times"></i></button>
 				        <a href="<?=base_url()?>subscriptions/item_update/<?=$subscription->subscription_has_items[$i]->id;?>" class="btn-option" data-toggle="mainmodal"><i class="fa fa-cog"></i></a>
 			       </td>
-			<td class="hidden-xs"><?php echo $subscription->subscription_has_items[$i]->name;?></td>
-			<td><?=$subscription->subscription_has_items[$i]->description;?></td>
-			<td align="center"><?=$subscription->subscription_has_items[$i]->amount;?></td>
-			<td><?php echo sprintf("%01.2f",$subscription->subscription_has_items[$i]->value);?></td>
+			<td ><?php echo $subscription->subscription_has_items[$i]->name;?></td>
+			<td class="hidden-xs"><?=$subscription->subscription_has_items[$i]->description;?></td>
+			<td class="hidden-xs" align="center"><?=$subscription->subscription_has_items[$i]->amount;?></td>
+			<td class="hidden-xs"><?php echo sprintf("%01.2f",$subscription->subscription_has_items[$i]->value);?></td>
 			<td><?php echo sprintf("%01.2f",$subscription->subscription_has_items[$i]->amount*$subscription->subscription_has_items[$i]->value);?></td>
 
 		</tr>

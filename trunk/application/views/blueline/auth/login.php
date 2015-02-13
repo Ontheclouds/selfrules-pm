@@ -1,6 +1,6 @@
 <?php $attributes = array('class' => 'form-signin', 'role'=> 'form', 'id' => 'login'); ?>
 <?=form_open('login', $attributes)?>
-        <div class="logo"><img src="<?=base_url()?><?=$core_settings->logo;?>" alt="<?=$core_settings->company;?>"></div>
+        <div class="logo"><img src="<?=base_url()?><?=$core_settings->invoice_logo;?>" alt="<?=$core_settings->company;?>"></div>
         <?php if($error == "true") { $message = explode(':', $message)?>
             <div id="error">
               <?=$message[1]?>

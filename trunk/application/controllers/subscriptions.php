@@ -238,7 +238,7 @@ class Subscriptions extends MY_Controller {
 			$this->email->to($data["subscription"]->company->client->email); 
 			$this->email->subject($subject); 
 			
-  			$email_subscription = read_file('./application/views/blackline/templates/email_subscription.html');
+  			$email_subscription = read_file('./application/views/'.$data["core_settings"]->template.'/templates/email_subscription.html');
   			$message = $this->parser->parse_string($email_subscription, $parse_data);
 			$this->email->message($message);			
 			if($this->email->send()){$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_send_subscription_success'));

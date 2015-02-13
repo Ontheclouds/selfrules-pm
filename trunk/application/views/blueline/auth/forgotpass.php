@@ -1,6 +1,6 @@
 <?php $attributes = array('class' => 'form-signin', 'role'=> 'form', 'id' => 'forgotpass'); ?>
 <?=form_open('forgotpass', $attributes)?>
-        <div class="logo"><img src="<?=base_url()?><?=$core_settings->logo;?>" alt="<?=$core_settings->company;?>"></div>
+        <div class="logo"><img src="<?=base_url()?><?=$core_settings->invoice_logo;?>" alt="<?=$core_settings->company;?>"></div>
         <?php if(isset($message)) { $message = explode(':', $message)?>
             <div class="forgotpass-success">
               <?=$message[1]?>

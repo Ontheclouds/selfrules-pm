@@ -88,6 +88,8 @@ class cProjects extends MY_Controller {
 				}
 				$this->content_view = 'projects/client_views/view_media';
 				$this->view_data['media'] = ProjectHasFile::find($media_id);
+				$project = Project::find_by_id($id);
+				if($project->company_id != $this->client->company->id){ redirect('cprojects');}
 				$this->view_data['form_action'] = 'cprojects/media/'.$id.'/view/'.$media_id;
 				$this->view_data['filetype'] = explode('.', $this->view_data['media']->filename);
 				$this->view_data['filetype'] = $this->view_data['filetype'][1];
@@ -198,6 +200,8 @@ class cProjects extends MY_Controller {
 	}
 	function download($media_id = FALSE){
 		$media = ProjectHasFile::find($media_id);
+		$project = Project::find_by_id($media->project_id);
+		if($project->company_id != $this->client->company->id){ redirect('cprojects');}
 		$media->download_counter = $media->download_counter+1;
 		$media->save();
 		header('Content-Description: File Transfer');

@@ -130,6 +130,30 @@ $(".nano").nanoScroller();
                  }
                  
                 
+           },
+           error: function(data)
+           {
+               $('.message-list li.active a.ajax').click();
+               
+               $(".ajaxform #send").html('<i class="fa fa-check-circle-o"></i>');
+              
+                  $('.message-content-reply, #timeline-comment').slideUp('slow').animate(
+                    { opacity: 0 },
+                    { queue: false, duration: 'slow' }
+                  );
+                 $(".note-editable").html("");
+                 var reload = active.closest('form').data('reload');
+                 if(reload) {
+                     $('#'+reload).load(document.URL + ' #'+reload, function() {
+                         $('#'+reload+' ul li:nth-child(2) .timeline-panel').addClass("highlight");
+                         $('#'+reload+' ul li:nth-child(2) .timeline-panel').delay("5000").removeClass("highlight");
+                         
+                        summernote();
+                     }); 
+                     
+                 }
+                 
+                
            }
          });
 
@@ -157,6 +181,15 @@ $(".nano").nanoScroller();
                  $(".note-editable").html("");
                  $("#showloader").hide();
                 
+           },
+           error: function(data)
+           {
+               
+               //$(".taskform #send").val(buttontext);
+              $(".taskform")[0].reset();
+                 $(".note-editable").html("");
+                 $("#showloader").hide();
+                
            }
          });
 
@@ -174,6 +207,14 @@ var content = $('textarea[name="note"]').html($('#textfield').code());
            url: url,
            data: $(this).closest('form').serialize(),
            success: function(data)
+           {
+            
+            var value = $( button ).text();
+            var str = value.replace('<i class="fa fa-spinner fa-spin"></i> ', "");
+            $(button).html(str);
+             $('#changed').fadeOut('slow');
+           },
+           error: function(data)
            {
             
             var value = $( button ).text();
@@ -213,7 +254,8 @@ $('.to_modal').click(function(e) {
 
 //Clickable rows
 	$(document).on("click", 'table#projects td, table#clients td, table#invoices td, table#cprojects td, table#cinvoices td, table#quotations td, table#messages td, table#cmessages td, table#subscriptions td, table#csubscriptions td, table#tickets td, table#ctickets td', function (e) {
-	    var id = $(this).parent().attr("id");
+	    
+      var id = $(this).parent().attr("id");
 	    if(id && !$(this).hasClass("noclick")){
 	   		var site = $(this).closest('table').attr("rel")+$(this).closest('table').attr("id");
 	    	if(!$(this).hasClass('option')){window.location = site+"/view/"+id;}
@@ -453,12 +495,16 @@ $('.to_modal').click(function(e) {
 
         //Mobile Menu
         $(document).on("click", '.menu-trigger', function (e) {
-          $(".side").toggleClass( 'hidden-xs');
+          $(".side").addClass( 'menu-action');
+          $(".sidebar-bg").addClass( 'show');
+          /*$(".sidebar, .navbar-header").addClass( 'show');*/
 
-          $(".sidebar").toggle().animate(
-            { display: 'block'},
-            { queue: false, duration: 'slow' }
-          );
+
+        });
+        $(document).on("click", '.content-area', function (e) {
+          $(".side").removeClass( 'menu-action');
+          $(".sidebar-bg").removeClass( 'show');
+          /*$(".sidebar, .navbar-header").removeClass( 'show');*/
 
         });
 
@@ -510,22 +556,10 @@ $(".fadein").toggleClass("slide");
 
         }); */
         
-$(document).ready(function() {
-	setTableContent();
-});
-$(window).resize(function() {
-	setTableContent();
-});
-function setTableContent() {
-	var viewportWidth = $(window).width();
-	if (viewportWidth < 1024)  {
-		if ($('.table-div').length) {
-			$('.table-div tbody tr').each( function() {
-				$(this).find('td').each(function(index, value) {
-					var theaderText = $('.table-div thead th').eq(index).text();
-					$(this).attr('data-content', theaderText);
-				});
-			});
-		}
-	}
-}
+        
+        
+  
+
+
+
+

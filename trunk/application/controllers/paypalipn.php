@@ -50,6 +50,9 @@ class Paypalipn extends MY_Controller
 
 			      $item_name = $_POST['item_name'];
 			      $item_number = $_POST['item_number'];
+
+			      log_message('error', 'Paypal IPN - Invoice number: #'.$item_number);
+
 			      $custom = explode('-', $_POST['custom']);  
 				  $payment_currency = $_POST['mc_currency'];
 			      $receiver_email = $_POST['receiver_email'];
@@ -105,8 +108,10 @@ class Paypalipn extends MY_Controller
 
 			    }
 			    else if (stripos ($res, "INVALID") !== false) {
-			
+				if(!$_POST){echo "IPN cannot be called outside of a paypal reuqest!";}else{
 			      log_message('error', 'Paypal IPN - Error: Invoice #'.$item_number.'. We have had an INVALID response. \n\nThe transaction ID number is: $txn_id \n\n username = $username');
+				 
+				}
 			    }
 			  } //end of while
 			fclose ($fp);

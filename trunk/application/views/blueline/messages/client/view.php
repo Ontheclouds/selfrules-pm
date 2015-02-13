@@ -24,6 +24,8 @@
               <i class="fa fa-star"></i> Mark
               <?php } ?>
               </a>
+              <a class="btn btn-danger" href="<?=base_url()?>cmessages/delete/<?=$value->id?>" role="button"><i class="fa fa-trash-o"></i> <?=$this->lang->line('application_delete');?></a>
+             
               
             </div>  
     <h1 class="page-title"><a class="icon glyphicon glyphicon-chevron-right trigger-message-close"></a><br><span class="dot"></span><?=$value->subject;?><span class="grey">(<?=$count;?>)</span></h1>

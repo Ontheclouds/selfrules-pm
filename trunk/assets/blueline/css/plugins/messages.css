@@ -5,8 +5,7 @@ body #main{
   background: #FFF;
   font-weight: 400;
   line-height: 1.5em;
-  color: #888;
-  border-top: 1px solid #DDD;
+  color: #505458;
 }
 .mainnavbar {
 position: fixed;
@@ -268,15 +267,15 @@ a:hover {
   transition-duration: .5s;
 }
 #main .header {
-padding: 14px 60px;
-height: 100px;
+padding: 10px 60px;
+height: 90px;
 line-height: 100px;
-  border-bottom: 1px solid #DDD;
-  overflow: hidden;
+overflow: hidden;
+background: #E5E9EC;
 }
 #main .header .page-title {
   display: block;
-  color: #444444;
+  color: #505458;
   font-size:30px;
 }
 #main .header .page-title .sidebar-toggle-btn {
@@ -384,7 +383,7 @@ line-height: 100px;
   opacity: .5;
 }
 #main .action-bar {
-  padding: 20px 60px;
+  padding: 15px 19px;
   border-bottom: 1px solid #DDD;
   overflow: hidden;
 }

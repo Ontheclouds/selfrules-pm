@@ -1,11 +1,11 @@
-<div class="col-sm-12  col-md-12 main">  
-	<div id="options" class="row">
+<div class="row">
+<div class="col-sm-12  col-md-12">  
+	
 			<a href="<?=base_url()?>quotations/update/<?=$quotation->id;?>/view" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_edit_quotation');?></a>
 			<?php if(empty($client)){ ?><a href="<?=base_url()?>quotations/create_client/<?=$quotation->id;?>" class="btn btn-primary" data-toggle="mainmodal"> <?=$this->lang->line('application_quotation_add_client');?></a><?php } ?>
-
 		
 </div>
-<hr>
+</div>
 		<div class="row">
 			<div class="col-md-6">
 				<div class="table-head"><?=$this->lang->line('application_quotation_details');?></div>
@@ -33,8 +33,9 @@
 					</div>
 				</div>
 	</div>
-			<br/>
-			<div class="row">
+			
+<div class="row">
+<div class="col-sm-12  col-md-12"> 
 		<div class="table-head"><?=$this->lang->line('application_answers');?></div>
 		<div class="table-div">
 			<div class="question"><?=$this->lang->line('quotation_question_1');?></div> <div class="answer"><?=$this->lang->line('quotation_question_1_aw_'.$quotation->q1);?></div>
@@ -48,5 +49,6 @@
 			</div>
 			</div>
 
-	 		
+	</div> 		
 	</div>
+</div>
